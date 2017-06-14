@@ -133,7 +133,7 @@
           <div class="modal-body row">
             <div class="col-md-3">
 
-              <form action="/aorddetectors" method='post'>
+              <form>
                 {% for exp in exps %}
                 <div class="radio">
                   <label>
@@ -149,7 +149,7 @@
               <p id="des"></p>
             </div>
 
-            <div class="col-md-4">
+            <div id="nwCol" class="col-md-4">
               <div id="advanced"></div>
             </div>
 
@@ -164,6 +164,47 @@
     </div>
   </div>
 
+  <!-- Modal for Advanced Options -->
+  <div class="modal fade" id="myModalAO" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+                                 <span aria-hidden="true">&times;</span>
+                                 <span class="sr-only">Close</span>
+                          </button>
+          <h4 class="modal-title" id="myModalLabel">
+                              Select Individual Detectors
+                          </h4>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+
+          <div class="modal-body row">
+            <div class="col-md-5">
+              <p class="text-center">You can select specifc detectors to become active or inactive. Detectors that are active by default are checked by default. Detectors that are present but inactive by defulat are unchecked by default. </p>
+            </div>
+
+            <div class="col-md-7 text-center">
+              <form id="advDet">
+                <div id="adDiv"></div>
+                <div id="saveao"> <button id="svAoBtn" type="button" class="btn btn-primary center-block">Save</button> </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="advlock" class="btn btn-warning" data-dismiss="modal">Lock In</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 </body>
 

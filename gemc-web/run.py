@@ -6,13 +6,14 @@ app = Flask(__name__)
 #global variables that hold essential user data
 experiments = []
 ec = ""
+advOps = []
 
 @app.route('/')
 def homepage():
     #must allow experiment list to be global as it needs to be rendered in each template
     global experiments
     #location of experiments directory
-    exp_directory = "/home/smarky/Desktop/json_exp"
+    exp_directory = "/home/smarky/active_dev/json_exp"
 
     #append to file and experiment list
     for exp in os.listdir(exp_directory):
@@ -27,7 +28,7 @@ def _process_description():
     #gets experiment selection form data
     experiment_choice = request.args.get('experiment_select')
 
-    #gets name in proper formatting
+    #gets name in proper formattingautocompleteautocomplete
     delchars = ''.join(c for c in map(chr, range(256)) if not c.isalnum())
 
     unscruched = str(experiment_choice)
@@ -37,13 +38,32 @@ def _process_description():
     ec = unscruched.translate(None, delchars)
 
     #gets the description of selected experiment from json file and returns the json object
-    with open('/home/smarky/Desktop/json_exp/' + ec + '.json') as data_file:
+    with open('/home/smarky/active_dev/json_exp/' + ec + '.json') as data_file:
         user_json = json.load(data_file)
 
     experimentDescription = str(user_json["description"])
 
     return jsonify(result=experimentDescription)
 
+@app.route('/_adv_detect_su')
+def ad_cb():
+    #gets the description of selected experiment from json file and returns the json object
+    with open('/home/smarky/active_dev/json_exp/' + ec + '.json') as data_file:
+        user_json = json.load(data_file)
+
+    experimentDetectors = user_json["detectors"]
+
+    return jsonify(advanced=experimentDetectors)
+
+@app.route('/_process_advanced')
+def get_ao():
+    global advOps
+    #gets advanced options selections from form data
+    advOps = request.args.get('advanced_select')
+
+    print(advOps)
+
+    return jsonify(test="All set")
 
 if __name__ == '__main__':
     app.run(debug = True)
