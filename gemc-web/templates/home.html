@@ -72,7 +72,7 @@
         <img src="static/images/gray.png" id="i2" width="200" height="200" class="img-responsive center-block" alt="Circle2">
       </div>
       <div class="col-6 col-sm-3">
-        <img src="static/images/gray.png" id="i3" width="200" height="200" class="img-responsive center-block" alt="Circle3">
+        <img src="static/images/green.png" id="i3" width="200" height="200" class="img-responsive center-block" alt="Circle3">
       </div>
       <div class="col-6 col-sm-3">
         <img src="static/images/gray.png" id="i4" width="200" height="200" class="img-responsive center-block" alt="Circle 4">
@@ -85,7 +85,7 @@
     <div class="row">
 
       <div class="col-6 col-sm-3">
-        <button type="button" class="btn btn-primary center-block">Generator Libraries</button>
+        <button class="btn btn-primary center-block" data-toggle="modal" data-target="#myModalGL">Generator Libraries</button>
       </div>
 
       <div class="col-6 col-sm-3">
@@ -96,7 +96,9 @@
       </div>
 
       <div class="col-6 col-sm-3">
-        <button type="button" class="btn btn-primary center-block">gemc Version</button>
+        <button class="btn btn-primary center-block" data-toggle="modal" data-target="#myModalGV">
+            gemc Version
+        </button>
       </div>
 
       <div class="col-6 col-sm-3">
@@ -106,10 +108,48 @@
 
     <br>
 
-
-
   </div>
 
+  <!-- Modal for Generator Libraries-->
+  <div class="modal fade" id="myModalGL" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+                                 <span aria-hidden="true">&times;</span>
+                                 <span class="sr-only">Close</span>
+                          </button>
+          <h4 class="modal-title" id="myModalLabel">
+                              Configure Generator Libraties
+                          </h4>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+
+          <div class="modal-body row">
+            <form id="genlibtxt">
+              <div class="form-group">
+                <label for="exampleTextarea">Paste in generator library</label>
+                <textarea class="form-control" name="mytextarea" id="exampleTextarea" rows="10"></textarea>
+            </form>
+            </div>
+            <br>
+            <div id="GLdivy">
+              <button id="svGLBtn" type="button" class="btn btn-primary center-block">Save</button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="gllock" class="btn btn-warning" data-dismiss="modal">Lock In</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal for DetectorSetup -->
   <div class="modal fade" id="myModalDS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -134,23 +174,23 @@
             <div class="col-md-3">
 
               <form>
-                {% for exp in exps %}
                 <div class="radio">
+                  {% for exp in exps %}
                   <label>
-                                    <input type="radio" value= {{ exp }} name="expradio"> {{ exp|e }}
-                                </label>
+                    <input type="radio" value= {{ exp }} name="expradio"> {{ exp|e }}
+                  </label>
+                  <br> {% endfor %}
                 </div>
-                {% endfor %}
                 <a href=# id="process_input"><button class='btn btn-default'>Next</button></a>
               </form>
             </div>
 
-            <div class="col-md-5">
+            <div id="erase1" class="col-md-5">
               <p id="des"></p>
             </div>
 
             <div id="nwCol" class="col-md-4">
-              <div id="advanced"></div>
+              <div id="needthisbutton"></div>
             </div>
 
           </div>
@@ -189,8 +229,8 @@
             </div>
 
             <div class="col-md-7 text-center">
-              <form id="advDet">
-                <div id="adDiv"></div>
+              <form id="acF">
+                <div id="acv"></div>
                 <div id="saveao"> <button id="svAoBtn" type="button" class="btn btn-primary center-block">Save</button> </div>
               </form>
             </div>
@@ -205,6 +245,42 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal for gemc Version -->
+  <div class="modal fade" id="myModalGV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+                                 <span aria-hidden="true">&times;</span>
+                                 <span class="sr-only">Close</span>
+                          </button>
+          <h4 class="modal-title" id="myModalLabel">
+                              gemc Version
+                          </h4>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+
+          <div class="modal-body row">
+            <div class="col-md-12 text-center">
+              <h2> Development level version is locked in for for this first alpha release. </h2>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="avlock" class="btn btn-warning" data-dismiss="modal">Lock In</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 
 </body>
 

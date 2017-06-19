@@ -4,10 +4,12 @@ import json, os
 app = Flask(__name__)
 
 #global variables that hold essential user data
+gl_part = ""
 experiments = []
 ec = ""
-advOps = []
+advOps = ""
 
+#homepage
 @app.route('/')
 def homepage():
     #must allow experiment list to be global as it needs to be rendered in each template
@@ -23,6 +25,21 @@ def homepage():
     #returns homepage with all available options
     return render_template('home.html', exps = experiments)
 
+#gets gl input
+@app.route('/_process_glinput')
+def glsetup():
+    #globally set gl part
+    global gl_part
+
+    #getting it from form
+    gl_step = request.args.get('glin', 0, type=str)
+
+    gl_part = gl_step
+
+    return jsonify(yesss=gl_step)
+
+
+#get more info and load adanced options from experiment selection
 @app.route('/_process_description')
 def _process_description():
     #gets experiment selection form data
@@ -45,6 +62,7 @@ def _process_description():
 
     return jsonify(result=experimentDescription)
 
+#gets data for advanced options modal
 @app.route('/_adv_detect_su')
 def ad_cb():
     #gets the description of selected experiment from json file and returns the json object
@@ -55,13 +73,12 @@ def ad_cb():
 
     return jsonify(advanced=experimentDetectors)
 
+#save advanced options
 @app.route('/_process_advanced')
 def get_ao():
     global advOps
     #gets advanced options selections from form data
-    advOps = request.args.get('advanced_select')
-
-    print(advOps)
+    advOps= request.args.get('advanced_select')
 
     return jsonify(test="All set")
 
