@@ -1,0 +1,68 @@
+ {
+	"experiment": "test",
+
+	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+
+	"detectors": [{
+			"name": "target",
+			"position": "0,0,0",
+			"rotation": "0,0,0",
+			"path": "experiments/clas12/targets",
+			"variation": "original",
+			"present": "yes"
+		},
+		{
+			"name": "bst",
+			"variation": "java",
+			"path": "experiments/clas12/bst",
+			"present": "yes"
+		},
+		{
+			"name": "cnd",
+			"variation": "original",
+			"path": "experiments/clas12/cnd",
+			"present": "yes"
+		},
+		{
+			"name": "ctof",
+			"variation": "cad",
+			"path": "experiments/clas12/ctof",
+			"present": "yes"
+		},
+		{
+			"name": "cad",
+			"path": "experiments/clas12/cnd",
+			"present": "yes"
+		},
+		{
+			"name": "htcc",
+			"variation": "original",
+			"path": "experiments/clas12/htcc",
+			"present": "yes"
+		},
+		{
+			"name": "solenoids",
+			"variation": "original",
+			"path": "experiments/clas12/magnets",
+			"present": "no"
+		},
+		{
+			"name": "torus",
+			"variation": "original",
+			"path": "experiments/clas12/magnets",
+			"present": "yes"
+		},
+		{
+			"name": "beamline",
+			"variation": "FTOn",
+			"path": "experiments/clas12/beamline",
+			"present": "yes"
+		},
+		{
+			"name": "ft",
+			"variation": "FTon",
+			"path": "experiments/clas12/ft",
+			"present": "no"
+		}
+	]
+}

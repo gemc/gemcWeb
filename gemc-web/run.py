@@ -15,7 +15,7 @@ def homepage():
     #must allow experiment list to be global as it needs to be rendered in each template
     global experiments
     #location of experiments directory
-    exp_directory = "/home/smarky/active_dev/json_exp"
+    exp_directory = "/home/smarky/active_dev/components"
 
     #append to file and experiment list
     for exp in os.listdir(exp_directory):
@@ -55,7 +55,7 @@ def _process_description():
     ec = unscruched.translate(None, delchars)
 
     #gets the description of selected experiment from json file and returns the json object
-    with open('/home/smarky/active_dev/json_exp/' + ec + '.json') as data_file:
+    with open('/home/smarky/active_dev/components/' + ec + '.json') as data_file:
         user_json = json.load(data_file)
 
     experimentDescription = str(user_json["description"])
@@ -66,7 +66,7 @@ def _process_description():
 @app.route('/_adv_detect_su')
 def ad_cb():
     #gets the description of selected experiment from json file and returns the json object
-    with open('/home/smarky/active_dev/json_exp/' + ec + '.json') as data_file:
+    with open('/home/smarky/active_dev/components/' + ec + '.json') as data_file:
         user_json = json.load(data_file)
 
     experimentDetectors = user_json["detectors"]
