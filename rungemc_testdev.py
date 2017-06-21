@@ -25,4 +25,6 @@ def rungemc():
     p.kill()
 
     #get the contents of the ouput file
-    os.system("cat out.ev")
+    x = os.system("cat out.ev")
+
+    return x
