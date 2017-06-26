@@ -28,7 +28,7 @@
   <style>
     #gui {
       position: relative;
-      margin-top: 15%;
+      margin-top: 5%;
     }
   </style>
 </head>
@@ -58,47 +58,95 @@
 
   <div id="gui" class="container">
 
-    <!--Progress circles -->
+    <!-- Title and Description -->
     <div class="row">
-      <div class="col-6 col-sm-3">
-        <img src="static/images/gray.png" id="i1" width="200" height="200" class="img-responsive center-block" alt="Circle1">
+      <div class="col-md-12">
+        <form id="UserTitle">
+          <div class="form-group">
+            <label for="InputExperimentNamebyUser">Name</label>
+            <input name="falcon" class="form-control" id="InputExperimentNamebyUser" aria-describedby="nameHelp" placeholder="Enter Experiment Name">
+            <small id="nameHelp" class="form-text text-muted">Add a name to your experiment for later reference.</small>
+          </div>
+        </form>
+        <button id="utsv" class="btn btn-primary">Save</button>
+        <br>
+        <br>
       </div>
-      <div class="col-6 col-sm-3">
-        <img src="static/images/gray.png" id="i2" width="200" height="200" class="img-responsive center-block" alt="Circle2">
-      </div>
-      <div class="col-6 col-sm-3">
-        <img src="static/images/green.png" id="i3" width="200" height="200" class="img-responsive center-block" alt="Circle3">
-      </div>
-      <div class="col-6 col-sm-3">
-        <img src="static/images/gray.png" id="i4" width="200" height="200" class="img-responsive center-block" alt="Circle 4">
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form id="UserAbstract">
+          <div class="form-group">
+            <label for="exampleTextarea">Abstract</label>
+            <textarea  class="form-control" id="bluejay" placeholder="Add Experiment Abstract" rows="3"></textarea>
+          </div>
+        </form>
+        <button id="uasv" class="btn btn-primary">Save</button>
+        <br>
       </div>
     </div>
 
     <br>
 
+    <!--User input displays-->
+    <div class="row">
+
+      <div id="usergldisp" class="col-6 col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item"><b>Generator Library File: </b>
+          </li>
+        </ul>
+      </div>
+
+      <div id="userdsdisp" class="col-6 col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item"><b>Experiment Choice: </b>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-success"><b>Version:</b>
+            <p id="dgemcver">Development</p>
+            <br>
+            <p><i><small>Development Version is locked in for alpha release.</i></small>
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-danger">Click go to run gemc with selected configuration. Results will return as an output file.</li>
+        </ul>
+      </div>
+
+    </div>
+
     <!--User input modals-->
     <div class="row">
 
-      <div class="col-6 col-sm-3">
-        <button class="btn btn-primary center-block" data-toggle="modal" data-target="#myModalGL">Generator Libraries</button>
+      <div class="col-6 col-md-3">
+        <button class="btn btn-lg btn-primary center-block" data-toggle="modal" data-target="#myModalGL">Generator Libraries</button>
       </div>
 
-      <div class="col-6 col-sm-3">
+      <div class="col-6 col-md-3">
         <!-- Button trigger for Detector Setup modal -->
-        <button class="btn btn-primary center-block" data-toggle="modal" data-target="#myModalDS">
+        <button class="btn btn-lg btn-primary center-block" data-toggle="modal" data-target="#myModalDS">
                 Detector Setup
             </button>
       </div>
 
-      <div class="col-6 col-sm-3">
-        <button class="btn btn-primary center-block" data-toggle="modal" data-target="#myModalGV">
+      <div class="col-6 col-md-3">
+        <button class="btn btn-lg btn-primary center-block disabled">
             gemc Version
         </button>
       </div>
 
-      <div class="col-6 col-sm-3">
+      <div class="col-6 col-md-3">
         <form action="testresults" method="post">
-          <button type="submit" class="btn btn-primary center-block">Go</button>
+          <button type="submit" class="btn btn-lg btn-primary center-block">Go</button>
         </form>
       </div>
     </div>
@@ -243,41 +291,6 @@
 
         <div class="modal-footer">
           <button type="button" id="advlock" class="btn btn-warning" data-dismiss="modal">Lock In</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for gemc Version -->
-  <div class="modal fade" id="myModalGV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-                                 <span aria-hidden="true">&times;</span>
-                                 <span class="sr-only">Close</span>
-                          </button>
-          <h4 class="modal-title" id="myModalLabel">
-                              gemc Version
-                          </h4>
-        </div>
-
-        <!-- Modal Body -->
-        <div class="modal-body">
-
-          <div class="modal-body row">
-            <div class="col-md-12 text-center">
-              <h2> Development level version is locked in for for this first alpha release. </h2>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" id="avlock" class="btn btn-warning" data-dismiss="modal">Lock In</button>
         </div>
 
       </div>

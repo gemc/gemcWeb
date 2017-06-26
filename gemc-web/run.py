@@ -10,6 +10,8 @@ experimentDetectors = []
 ec = ""
 advOps = ""
 user_gcard=""
+user_exp_name=""
+user_exp_abstract=""
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -30,6 +32,30 @@ def homepage():
 
     #returns homepage with all available options
     return render_template('home.html', exps = experiments)
+
+#this gets the user's provided name
+@app.route('/_process_username')
+def processname():
+    drat = request.args.get('uexpname')
+
+    global user_exp_name
+
+    user_exp_name = str(drat)
+
+    return jsonify(yyy=user_exp_name)
+
+#this gets the user's provided abstract
+@app.route('/_process_abstract')
+def processabstract():
+    wrat = request.args.get('uexpab')
+
+    print(wrat)
+
+    global user_exp_abstract
+
+    user_exp_abstract = str(wrat)
+
+    return jsonify(nnn=user_exp_abstract)
 
 #this gets the glfileupload
 @app.route('/uploadajax', methods=['POST'])
