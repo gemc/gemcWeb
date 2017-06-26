@@ -1,0 +1,99 @@
+{
+	"experiment": "clas12",
+
+	"description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+
+	"detectors": [{
+			"name": "target",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/targets/target' factory='TEXT' variation='lH2'/>",
+			"variation": "original",
+			"present": "yes"
+		},
+		{
+			"name": "bst",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/bst/bst' factory='TEXT' variation='java'/>",
+			"present": "yes"
+		},
+		{
+			"name": "cnd",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/cnd/cnd' factory='TEXT' variation='original'/>",
+			"present": "yes"
+		},
+		{
+			"name": "ctof",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/ctof/ctof' factory='TEXT' variation='cad'/>",
+			"present": "yes"
+		},
+		{
+			"name": "ctof_cad",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/ctof/cad/' factory='CAD'/>",
+			"present": "yes"
+		},
+		{
+			"name": "htcc",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/htcc/htcc' factory='TEXT' variation='original'/>",
+			"present": "yes"
+		},
+		{
+			"name": "solenoid",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/magnets/solenoid' factory='TEXT' variation='original'/>",
+			"present": "yes"
+		},
+		{
+			"name": "torus",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/magnets/torus' factory='TEXT' variation='original'/>",
+			"present": "yes"
+		},
+		{
+			"name": "beamline",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/beamline/beamline' factory='TEXT' variation='FTOn'/>",
+			"present": "yes"
+		},
+		{
+			"name": "ft",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/ft/ft' factory='TEXT' variation='FTOn'/>",
+			"present": "yes"
+		},
+		{
+			"name": "forwardCarriage",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/fc/forwardCarriage' factory='TEXT' variation='original'/>",
+			"present": "yes"
+		},
+		{
+			"name": "dc",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/dc/dc' factory='TEXT' variation='java'/>",
+			"present": "yes"
+		},
+		{
+			"name": "ftof",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/ftof/ftof' factory='TEXT' variation='java'/>",
+			"present": "yes"
+		},
+		{
+			"name": "ec",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/ec/ec' factory='TEXT' variation='java'/>x",
+			"present": "yes"
+		},
+		{
+			"name": "pcal",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/pcal/pcal' factory='TEXT' variation='java'/>",
+			"present": "yes"
+		},
+		{
+			"name": "ltcc",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/ltcc/ltcc' factory='TEXT' variation='original'/>",
+			"present": "yes"
+		},
+		{
+			"name": "ltcc_cad_cone",
+			"path": "experiments/clas12/ltcc",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/ltcc/cad/' factory='CAD'/>",
+			"present": "yes"
+		},
+		{
+			"name": "ltcc_cad",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/ltcc/cad_cone/' factory='CAD'/>",
+			"present": "yes"
+		}
+	]
+}

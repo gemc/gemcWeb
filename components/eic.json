@@ -1,0 +1,13 @@
+{
+	"experiment": "eic",
+
+	"description": "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat",
+
+	"detectors": [{
+			"name": "target",
+			"tag": "<detector name='/home/smarky/active_dev/clas12Tags-master/4a.1.0/experiments/clas12/targets/target' factory='TEXT' variation='lH2'/>",
+			"variation": "original",
+			"present": "yes"
+		}
+	]	
+}
