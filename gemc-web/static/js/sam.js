@@ -56,7 +56,7 @@ $(document).ready(function() {
 
   //This loads the option to save experiment selection and presents more info and options
   $(function() {
-    $('a#process_input').bind('click', function() {
+    $('#userec').click(function() {
       $('#userdsdisp').empty()
       $('#needthisbutton').empty();
       $.getJSON('/_process_description', {
@@ -103,5 +103,11 @@ $(document).ready(function() {
     });
   });
 
+  $(function() {
+    $('#loadinggiftrigger').click(function() {
+      $('#loading').append("<img src='static/images/ajax-loader.gif' alt ='Loading GIF'>");
+      $('#loading').append("<h3>gemc is running on the server, awaiting results<h3>");
+    });
+  });
 
 });

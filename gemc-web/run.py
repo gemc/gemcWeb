@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, jsonify, url_for, request, send_file
+from flask import Flask, render_template, request, jsonify, url_for, redirect, send_file
 from datetime import datetime
 from werkzeug import secure_filename
-import json, os, subprocess, uuid
+import json, os, subprocess, uuid, time
 
 #global variables that hold essential user data
 glfile = ""
@@ -9,9 +9,10 @@ experiments = []
 experimentDetectors = []
 ec = ""
 advOps = ""
-user_gcard=""
+user_out=""
 user_exp_name=""
 user_exp_abstract=""
+piped_out = ""
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -63,14 +64,15 @@ def upldfile():
     if request.method == 'POST':
         files = request.files['file']
         if files:
-            filename = secure_filename(files.filename)
+            fn = secure_filename(files.filename)
+            filename = str(uuid.uuid4()) + secure_filename(files.filename)
             app.logger.info('FileName: ' + filename)
             updir = os.path.join(basedir, 'upload/')
             files.save(os.path.join(updir, filename))
             file_size = os.path.getsize(os.path.join(updir, filename))
             global glfile
             glfile = "/home/smarky/active_dev/gemc-web/upload/" + filename
-            return jsonify(name=filename, size=file_size)
+            return jsonify(name=fn, size=file_size)
 
 #get more info and load adanced options from experiment selection
 @app.route('/_process_description')
@@ -125,10 +127,11 @@ def get_ao():
 
     return jsonify(test=tret)
 
-@app.route('/testresults', methods = ['POST', 'GET'])
-def the_finisher():
+#generates gcard and runs gemc
+@app.route('/gogogo', methods = ['POST', 'GET'])
+def gengcardandgo():
     if request.method == 'POST':
-        global user_gcard
+        global user_out
         global advOps
         global experimentDetectors
         global glfile
@@ -163,22 +166,65 @@ def the_finisher():
             fo.write("</gcard>" + '\n')
             fo.close()
 
-        #run gemc for test scenario
-        p = subprocess.Popen(args=['/bin/csh', '-c', "gemc "+ user_gcard +" -USE_GUI=0"])
+        global piped_out
+        piped_out = str(uuid.uuid4()) + "out.txt"
 
-        #check to see if gemc is done and exit when it is
-        while True:
-            if os.path.isfile(user_out):
+        with open(piped_out,"wb+") as out:
+            p = subprocess.Popen(args=['/bin/csh', '-c', "gemc " +  user_gcard + " -USE_GUI=0 -N=10"], stdout=out)
+
+            while True:
+                while 1:
+                    where = out.tell()
+                    line = out.readline()
+                    if not line:
+                        time.sleep(1)
+                        out.seek(where)
+                    else:
+                        if "Event Action: >>  Begin of event" in line:
+                            print line
+                        elif "> Total gemc time:" in line:
+                            print line
+                            break
+                        elif "> Number of events to be simulated set to:" in line:
+                            print line
+                        elif "> Initializing GEant4 MonteCarlo:" in line:
+                            print line
+                        elif "> Loading field map" in line:
+                            print line
+                        elif "Beam Settings >>" in line:
+                            print line
+                        elif ">> Registering experiment" in line:
+                            print line
+                        elif ">> Parsing clas12.gcard for options:" in line:
+                            print line
+                        elif "> Choice of Physics" in line:
+                            print line
+                        elif "Aborted" in line:
+                            print "ERROR!" + line
+                            break
+                        else:
+                            pass
                 break
-            else:
-                pass
 
-        #kill gemc amd subprocess
-        os.system("pkill -HUP gemc");
-        p.kill()
-        sendthis = "/home/smarky/active_dev/gemc-web/output/" + user_out
+            #kill gemc amd subprocess
+            os.system("pkill -HUP gemc");
+            p.kill()
+            out.close()
 
-        return send_file(sendthis,  attachment_filename='Output File')
+            return redirect(url_for('user_res'))
+
+
+#returns results
+@app.route('/theresults')
+def user_res():
+    global user_out
+
+    sendthis = "/home/smarky/active_dev/gemc-web/output/" + user_out
+
+    global user_exp_name
+
+    sendname = user_exp_name + "_output.ev"
+    return send_file(sendthis, attachment_filename=sendname)
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug=True)

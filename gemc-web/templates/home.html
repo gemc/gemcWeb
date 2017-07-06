@@ -56,6 +56,7 @@
     </div>
   </nav>
 
+  <!-- Main User GUI-->
   <div id="gui" class="container">
 
     <!-- Title and Description -->
@@ -78,7 +79,7 @@
         <form id="UserAbstract">
           <div class="form-group">
             <label for="exampleTextarea">Abstract</label>
-            <textarea  class="form-control" id="bluejay" placeholder="Add Experiment Abstract" rows="3"></textarea>
+            <textarea class="form-control" id="bluejay" placeholder="Add Experiment Abstract" rows="3"></textarea>
           </div>
         </form>
         <button id="uasv" class="btn btn-primary">Save</button>
@@ -145,8 +146,8 @@
       </div>
 
       <div class="col-6 col-md-3">
-        <form action="testresults" method="post">
-          <button type="submit" class="btn btn-lg btn-primary center-block">Go</button>
+        <form action="gogogo" method="post">
+          <button id="loadinggiftrigger" type="submit" class="btn btn-lg btn-primary center-block">Go</button>
         </form>
       </div>
     </div>
@@ -232,8 +233,8 @@
                   </label>
                   <br> {% endfor %}
                 </div>
-                <a href=# id="process_input"><button class='btn btn-default'>Next</button></a>
               </form>
+              <button id="userec" class='btn btn-default'>Next</button>
             </div>
 
             <div id="erase1" class="col-md-5">
@@ -297,6 +298,14 @@
     </div>
   </div>
 
+  <!-- gemc Loading sign-->
+  <div class="row">
+    <div class="text-center center-block" id="loading">
+      <br>
+    </div>
+  </div>
+
+  </script>
 
 </body>
 
