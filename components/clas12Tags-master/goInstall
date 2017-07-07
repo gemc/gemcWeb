@@ -1,0 +1,37 @@
+#!/bin/csh -f
+
+# scripts to be run at JLAB
+
+if($#argv != 1) then
+	echo " "
+	echo "Usage:   "
+	echo  "  >> goInstall <version>"
+	echo
+	exit 0
+endif
+
+echo
+echo Remember to change the gemc tag in gemc.cc
+echo
+
+
+set TAGTOINSTALL = $1
+
+
+echo
+echo Installing gemc clas12 tag $TAGTOINSTALL on $OSRELEASE
+
+# making sure all versions are there
+cd /group/clas12/gemc
+git pull
+
+
+cd $TAGTOINSTALL/source
+scons -c
+scons -j15 OPT=1
+mkdir -p bin/$OSRELEASE
+mv gemc bin/$OSRELEASE
+
+
+
+

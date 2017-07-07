@@ -1,0 +1,11 @@
+                ctof  |              bankid  |                                      ctof bank ID  |  400   |                  Di  
+                ctof  |              paddle  |                                     paddle number  |    1   |                  Di  
+                ctof  |                ADCU  |                                      ADC Upstream  |    2   |                  Di  
+                ctof  |                ADCD  |                                    ADC Downstream  |    3   |                  Di  
+                ctof  |                TDCU  |                                      TDC Upstream  |    4   |                  Di  
+                ctof  |                TDCD  |                                    TDC Downstream  |    5   |                  Di  
+                ctof  |               ADCUu  |                            ADC Upstream Unsmeared  |    6   |                  Di  
+                ctof  |               ADCDu  |                          ADC Downstream Unsmeared  |    7   |                  Di  
+                ctof  |               TDCUu  |                            TDC Upstream Unsmeared  |    8   |                  Di  
+                ctof  |               TDCDu  |                          TDC Downstream Unsmeared  |    9   |                  Di  
+                ctof  |                hitn  |                                        hit number  |   99   |                  Di  
