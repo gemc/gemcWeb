@@ -4,7 +4,7 @@
 
 **This is an Ubuntu install guide for gemc**
 
-Other install options are avaible on the [gemc website] (http://gemc.jlab.org/gemc/html/index.html)
+Other install options are avaible on the [gemc website](http://gemc.jlab.org/gemc/html/index.html)
 
 ### Install dependencies 
 
