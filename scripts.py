@@ -55,6 +55,8 @@ def get_experiment_list():
 def create_project_dir(user, experiment):
 	"""Creates a directory for an experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/')
+	if os.path.isdir(experiment):
+		os.rmdir(experiment)
 	os.mkdir(experiment)
 
 def create_experiment_data(user, experiment):
