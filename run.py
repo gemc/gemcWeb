@@ -30,7 +30,7 @@ def login():
 
 @app.route('/createaccount', methods=['GET' , 'POST'])
 def create_account():
-		"""Handles accoutn creation"""
+    """Handles accoutn creation"""
     if request.method == 'POST':
         session.pop('user', None)
 
@@ -50,14 +50,14 @@ def create_account():
 
 @app.before_request
 def before_request():
-		"""Session handling"""
+    """Session handling"""
     g.user = None
     if 'user' in session:
         g.user = session['user']
 
 @app.route('/home')
 def home():
-		"""Renders the user's homepage, including there existing projects in tabular form"""
+    """Renders the user's homepage, including there existing projects in tabular form"""
     if g.user:
         user = session['user']
         projects= s.get_user_projects(g.user)
@@ -94,14 +94,14 @@ def fetch_results(project):
 
 @app.route('/about')
 def about():
-		"""Renders the about page"""
+    """Renders the about page"""
     if g.user:
         return render_template('about.html')
     return redirect(url_for('login'))
 
 @app.route('/docs')
 def docs():
-		""" Renders the docs page"""
+    """ Renders the docs page"""
     if g.user:
         return render_template('docs.html')
     return redirect(url_for('login'))
@@ -130,7 +130,7 @@ def name_and_abstract():
 
 @app.route('/_gl_upload', methods=['POST'])
 def gl():
-		"""Handles getting the gl file of a new experiment"""
+        """Handles getting the gl file of a new experiment"""
 	import uuid
 	from werkzeug import secure_filename
 	if g.user:
@@ -150,7 +150,7 @@ def gl():
 
 @app.route('/_ec')
 def ec():
-		"""Handles getting the experiment choice of a new experiment"""
+	"""Handles getting the experiment choice of a new experiment"""
 	if g.user:
 		ec = s.trim_ec(request.args.get('x_sel'))
 		edes = s.get_ec_info(ec, 'description')
@@ -160,7 +160,7 @@ def ec():
 
 @app.route('/_display_ao')
 def display_ao():
-		"""Handles displaying the advanced options of an experiment"""
+	"""Handles displaying the advanced options of an experiment"""
 	if g.user:
 		t = s.get_experiment_data(g.user, session['exp'], 'ec')
 		edet = s.get_ec_info(str(t), 'detectors')
@@ -169,7 +169,7 @@ def display_ao():
 
 @app.route('/_ao')
 def ao():
-		"""Handles getting the ao if selected of a new experiment"""
+	"""Handles getting the ao if selected of a new experiment"""
 	if g.user:
 		ao = s.trim_ao(request.args.get('advanced_select'))
 		s.write_experiment_data(g.user, session['exp'], 'ao', ao)
@@ -178,7 +178,7 @@ def ao():
 
 @app.route('/go')
 def go():
-	"""Generates the gcard, runs gemc and returns results of a new experiment"""
+    """Generates the gcard, runs gemc and returns results of a new experiment"""
     if g.user:
         s.gen_gcard(g.user, session['exp'])
         if s.run_gemc(g.user, session['exp']):
