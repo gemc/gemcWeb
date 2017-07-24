@@ -10,6 +10,7 @@ app.secret_key = os.urandom(24)
 
 @app.route('/', methods=['GET' , 'POST'])
 def login():
+    """Renders the log in template, allows for account creation, page bounces back if credentials are incorrrect"""
     if request.method == 'POST':
         session.pop('user', None)
 
@@ -29,6 +30,7 @@ def login():
 
 @app.route('/createaccount', methods=['GET' , 'POST'])
 def create_account():
+		"""Handles accoutn creation"""
     if request.method == 'POST':
         session.pop('user', None)
 
@@ -48,18 +50,23 @@ def create_account():
 
 @app.before_request
 def before_request():
+		"""Session handling"""
     g.user = None
     if 'user' in session:
         g.user = session['user']
 
 @app.route('/home')
 def home():
+		"""Renders the user's homepage, including there existing projects in tabular form"""
     if g.user:
         user = session['user']
         projects= s.get_user_projects(g.user)
         return render_template('home.html', user=user, projects=projects)
     return redirect(url_for('login'))
 
+#####
+#The following fetch files of existing projects
+#####
 @app.route('/_fetch_out/<project>')
 def fetch_out(project):
     if g.user:
@@ -87,18 +94,21 @@ def fetch_results(project):
 
 @app.route('/about')
 def about():
+		"""Renders the about page"""
     if g.user:
         return render_template('about.html')
     return redirect(url_for('login'))
 
 @app.route('/docs')
 def docs():
+		""" Renders the docs page"""
     if g.user:
         return render_template('docs.html')
     return redirect(url_for('login'))
 
 @app.route('/_new_experiment')
 def new_exp():
+	"""Loads a blank new experiment template"""
 	if g.user:
 		exps = s.get_experiment_list()
 		return render_template('newexperiment.html', exps=exps)
@@ -106,6 +116,7 @@ def new_exp():
 
 @app.route('/_name_&_abstract')
 def name_and_abstract():
+	"""Handles getting the name and abstract of a new experiment"""
 	if g.user:
 		title = request.args.get('title')
 		abstract = request.args.get('abstract')
@@ -119,6 +130,7 @@ def name_and_abstract():
 
 @app.route('/_gl_upload', methods=['POST'])
 def gl():
+		"""Handles getting the gl file of a new experiment"""
 	import uuid
 	from werkzeug import secure_filename
 	if g.user:
@@ -138,6 +150,7 @@ def gl():
 
 @app.route('/_ec')
 def ec():
+		"""Handles getting the experiment choice of a new experiment"""
 	if g.user:
 		ec = s.trim_ec(request.args.get('x_sel'))
 		edes = s.get_ec_info(ec, 'description')
@@ -147,6 +160,7 @@ def ec():
 
 @app.route('/_display_ao')
 def display_ao():
+		"""Handles displaying the advanced options of an experiment"""
 	if g.user:
 		t = s.get_experiment_data(g.user, session['exp'], 'ec')
 		edet = s.get_ec_info(str(t), 'detectors')
@@ -155,6 +169,7 @@ def display_ao():
 
 @app.route('/_ao')
 def ao():
+		"""Handles getting the ao if selected of a new experiment"""
 	if g.user:
 		ao = s.trim_ao(request.args.get('advanced_select'))
 		s.write_experiment_data(g.user, session['exp'], 'ao', ao)
@@ -163,6 +178,7 @@ def ao():
 
 @app.route('/go')
 def go():
+	"""Generates the gcard, runs gemc and returns results of a new experiment"""
     if g.user:
         s.gen_gcard(g.user, session['exp'])
         if s.run_gemc(g.user, session['exp']):
@@ -175,4 +191,4 @@ def go():
             return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True) #omit debug=True if project is production, rather than development
