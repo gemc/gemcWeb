@@ -81,7 +81,7 @@ be utilized to better maintain individual user’s accounts and project
 * [Bootstrap](http://getbootstrap.com/)
 * [jQuery](https://jquery.com/)
 * [Flask](http://flask.pocoo.org/)
-* [Jinja (http://jinja.pocoo.org/docs/2.9/)
+* [Jinja2] (http://jinja.pocoo.org/docs/2.9/)
 
 ## Software Design
 
