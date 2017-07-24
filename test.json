@@ -1,0 +1,13 @@
+{
+	"experiment": "test",
+
+	"description": "Just the target of the clas12 experiment.",
+
+	"detectors": [{
+			"name": "target",
+			"tag": "<detector name='/components/clas12/experiments/clas12/targets/target' factory='TEXT' variation='lH2'/>",
+			"variation": "original",
+			"present": "yes"
+		}
+	]
+}
