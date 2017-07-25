@@ -81,7 +81,7 @@ be utilized to better maintain individual user’s accounts and project
 * [Bootstrap](http://getbootstrap.com/)
 * [jQuery](https://jquery.com/)
 * [Flask](http://flask.pocoo.org/)
-* [Jinja2] (http://jinja.pocoo.org/docs/2.9/)
+* [Jinja2](http://jinja.pocoo.org/docs/2.9/)
 
 ## Software Design
 
@@ -94,8 +94,8 @@ The following is the directory structure of gemcWeb, highlighting important file
 |-- run.py
 |-- scripts.py
 |__ /components
-		|__ /example_experiment
-		|__ /expjson
+	|__ /example_experiment
+	|__ /expjson
 |__ /static
 	|__ /css
 	|__ /fonts
@@ -105,9 +105,9 @@ The following is the directory structure of gemcWeb, highlighting important file
 |__ /templates
 |__ /upload
 |__ /users
-		|__ /example_user
-				|__ /projects
-				|-- pwd.txt
+	|__ /example_user
+		|__ /projects
+		|-- pwd.txt
 ```
 
 #### run.py
