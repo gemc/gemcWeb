@@ -2,7 +2,7 @@
 
 ## About
 
-gemcWeb is the first and only cloud based nuclear physics simulation software. The original main-net version is privately hosted at Jefferson National Lab. However, obviously, this is an open source project and can be easily hosted at any instituion. Those interestd in doing this, or gemcWeb development should check out the docs for a full developer's guide.
+gemcWeb is a cloud based nuclear physics simulation software. The original main-net version is privately hosted at Jefferson National Lab. However, obviously, this is an open source project and can be easily hosted at any instituion. Those interestd in doing this, or gemcWeb development should check out the docs for a full developer's guide.
 
 ## Quick Installation for development/hosting
 
