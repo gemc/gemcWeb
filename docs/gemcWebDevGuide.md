@@ -3,7 +3,7 @@
 ## Introduction
 
 This guide is meant as a quick start guide for developers wanting to con-
-tribute to the world’s first web based nuclear physics simulation software.
+tribute to the a web based nuclear physics simulation software.
 As the name would suggest, the Geant4 based simulation software gemc is
 used on the back-end. gemc was developed by Maurizio Ungaro, Ph.D, at
 Thomas Jefferson National Accelerator Facility in Newport News, Virginia.
