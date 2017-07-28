@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Details</title>
+
+  <!-- Bootstrap -->
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/static/js/bootstrap.min.js"></script>
+
+  <!-- Proper page allignemnt for the gui-->
+  <style>
+    #gui {
+      position: relative;
+      margin-top: 10%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">gemcWeb</a>
+      </div>
+      <div id="navbar" class="navbar-nav">
+        <ul class="nav navbar-nav">
+          <li><a href="home">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="docs">Docs</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- view GUI -->
+  <div id="gui" class="container">
+    <h1>{{ project }}</h1>
+    <h3>{{ abstract }}</h3>
+    <!-- User information displays-->
+    <div class="row center-block">
+      <br>
+      <br>
+      <div class="col-6 col-md-3">
+        <a href={{ url_for('fetch_mc', project=project) }} class="btn btn-success btn-lg" role="button">Generator Libray</a>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <a href={{ url_for('fetch_g', project=project) }} class="btn btn-primary btn-lg" role="button">gcard</a>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <a href={{ url_for('fetch_results', project=project) }} class="btn btn-warning btn-lg" role="button">Results</a>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <a href={{ url_for('fetch_out', project=project) }} class="btn btn-danger btn-lg" role="button">gemc logfile</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

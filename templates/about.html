@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>About</title>
+
+  <!-- Bootstrap -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/static/js/bootstrap.min.js"></script>
+
+  <!-- Proper page allignemnt for the gui-->
+  <style>
+    #gui {
+      position: relative;
+      margin-top: 5%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">gemcWeb</a>
+      </div>
+      <div id="navbar" class="navbar-nav">
+        <ul class="nav navbar-nav">
+          <li><a href="home">Home</a></li>
+          <li class="active"><a href="about">About</a></li>
+          <li><a href="docs">Docs</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About GUI -->
+  <div id="gui" class="container">
+
+    <div class="row">
+      <h1>About</h1>
+      <div class="col-lg-12">
+        <p>Welcome to the world's first web based nuclear physics simulation software. As the name would suggest, the Geant4 based simulation software gemc is used on the back-end. gemc was developed by Maurizio Ungaro, Ph.D, at the Thomas Jefferson National
+          Accelerator Facility in Newport News, Virginia. More information about gemc can be found on the official website: <a href="https://gemc.jlab.org/gemc/html/index.html">gemc website</a>.</p>
+
+        <p>The official GitHub repository can be found here: <a href="https://github.com/gemc/gemcWeb">gemcWeb GitHub</a></p>
+      </div>
+    </div>
+
+    <div>
+      <div class="row">
+        <h1>The Team</h1>
+        <!-- Three columns of text below the carousel -->
+        <div class="row center-block text-center">
+          <div class="col-lg-4">
+            <!--<img class="img-circle" src="Sam" alt="Generic placeholder image" width="140" height="140"> -->
+            <h2>Sam Markelon</h2>
+            <h4>Lead Developer</h4>
+            <!--p>Insert short bio here</p> -->
+          </div>
+
+          <div class="col-lg-4">
+            <!--<img class="img-circle" src="" alt="Mauri" width="140" height="140"> -->
+            <h2>Maurizio Ungaro, Ph.D</h2>
+            <h4>Advisor and Developer of gemc</h4>
+            <!--<p>Insert short bio here</p> -->
+          </div>
+          <div class="col-lg-4">
+            <!--<img class="img-circle" src="Markus" alt="Generic placeholder image" width="140" height="140"> -->
+            <h2>Markus Diefenthaler, Ph.D</h2>
+            <h4>Adisor</h4>
+            <!--<p>Insert short bio here</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
