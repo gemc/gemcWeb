@@ -1,0 +1,271 @@
+<html lang="en">
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>gemcWeb</title>
+
+  <!-- Bootstrap -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/static/js/bootstrap.min.js"></script>
+
+	<!--Custom scripts-->
+	<script src="/static/js/sam.js"></script>
+
+  <!--GUI allignment-->
+  <style>
+    #gui {
+      position: relative;
+      margin-top: 5%;
+    }
+ </style>
+
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">gemcWeb</a>
+      </div>
+      <div id="navbar" class="navbar-nav">
+        <ul class="nav navbar-nav">
+          <li><a href= {{ url_for('home') }}>Home</a></li>
+          <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href= {{ url_for('new_exp') }} clas="active">New Project</a></li>
+                  <li><a href= {{ url_for('proj_lst') }}>Projects</a></li>
+                </ul>
+              </li>
+          <li><a href= {{ url_for('aboutin') }}>About</a></li>
+          <li><a href= {{ url_for('docsin') }} >Docs</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Main User GUI-->
+  <div id="gui" class="container">
+
+    <!-- Title and Abstact -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Project Details</h3>
+      </div>
+      <div class="panel-body">
+        <form id="ExperimentTitleandAbstract">
+          <div class="form-group">
+            <label for="experimentName">Name</label>
+            <input id="experimentName" class="form-control" aria-describedby="nameHelp" placeholder="Enter Experiment Name">
+          </div>
+          <div class="form-group">
+            <label for="experimentAbstract">Description</label>
+            <textarea id="experimentAbstract" class="form-control" placeholder="Add Experiment Abstract" rows="2"></textarea>
+          </div>
+        </form>
+        <button id="saveTitleandAbstract" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+
+    <!-- Project Settings -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Settings</h3>
+      </div>
+      <div class="panel-body">
+        <!--User input displays and Go button!-->
+        <div class="row">
+          <div  id="GLdisplay" class="col-6 col-md-4">
+            <ul class="list-group">
+              <li class="list-group-item"><b>Generator Library File: </b>
+              </li>
+            </ul>
+          </div>
+
+          <div  id="DSdisplay" class="col-6 col-md-4">
+            <ul class="list-group">
+              <li class="list-group-item"><b>Experiment Choice: </b>
+              </li>
+            </ul>
+          </div>
+
+          <div id="GVdisplay"  class="col-6 col-md-4">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-success"><b>Version:</b>
+                <p>Development</p>
+                <br>
+                <p><i><small>Development Version is locked in for alpha release.</i></small>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+            <!--User input buttons-->
+            <div class="row">
+              <div id="glbut"  class="col-6 col-md-4">
+                <button class="btn btn-lg btn-primary center-block" data-toggle="modal" data-target="#myModalGL">Generator Libraries</button>
+              </div>
+              <div id="dsbut"  class="col-6 col-md-4">
+                <!-- Button trigger for Detector Setup modal -->
+                <button class="btn btn-lg btn-primary center-block" data-toggle="modal" data-target="#myModalDS">
+                        Detector Setup
+                    </button>
+              </div>
+              <div id="gvbut"  class="col-6 col-md-4">
+                <button class="btn btn-lg btn-primary center-block disabled">
+                    gemc Version
+                </button>
+              </div>
+            </div>
+      </div>
+    </div>
+
+    <!--Run Project -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Run Project</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-6 col-md-4 center-block">
+            <img id="go"  src="static/images/go.png" alt="Go!">
+          </div>
+          <div class="col-6 col-md-4">
+            <h3>Status:</h3>
+            <div class="center-block text-center" id="loading">
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <h3>Results:</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Modal for Generator Libraries -->
+  <div id="myModalGL" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Configure Generator Libraries</h4>
+        </div>
+        <div class="modal-body">
+					<div id="glfilexplain">
+						<p>Upload generator library configuration file. Two formats are acceptable: Lund or Beagle. More information is available in the docs. </p>
+						<br>
+						<p class="text-center">---------------</p>
+					</div>
+					<br>
+					<form id="glupload" method="post" class="center-block text-center" enctype="multipart/form-data">
+						<input name="file" type="file">
+						<br>
+						<button id="filesubmit" type="button" class="btn btn-success">Upload</button>
+					</form>
+					<div class="text-center">
+						<br>
+						<p>Result Filename:&nbsp;<span id="resultFilename"> here</span></p>
+						<br>
+						<p>Result Filesize:&nbsp;<span id="resultFilesize">here</span></p>
+					</div>
+				</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Lock In</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal for Detector Setup -->
+  <div id="myModalDS" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Select Experiment</h4>
+        </div>
+        <div class="modal-body">
+					<div class="modal-body row">
+
+            <div class="col-md-3">
+              <form>
+                <div class="radio">
+                  {% for exp in exps %}
+                  <label>
+                    <input type="radio" value= {{ exp }} id= {{ exp }} name="expradio"> {{ exp|e }}
+                  </label>
+                  <br> {% endfor %}
+                </div>
+              </form>
+              <button id="experiment_select" class='btn btn-default'>Next</button>
+            </div>
+
+            <div class="col-md-5">
+              <div id="experiment_desctiption"></div>
+            </div>
+
+            <div id="div_for_ao" class="col-md-4">
+              <div id="button_for_ao"></div>
+            </div>
+
+          	</div>
+					</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Lock In</button>
+      	</div>
+    	</div>
+  	</div>
+	</div>
+
+  <!-- Modal for Advanced Options-->
+  <div id="myModalAO" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Select Individual Detectors</h4>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body row">
+            <div class="col-md-5">
+              <p class="text-center">You can select specifc detectors to become active or inactive. Detectors that are active by default are checked by default. Detectors that are present, but inactive by defulat are unchecked by default. </p>
+            </div>
+
+            <div class="col-md-7 text-center">
+							<form id="form_for_ao">
+	 						<div id="checkboxes_for_ao"></div>
+	 						<div id="save_for_ao"> <button id="savebutton_for_ao" type="button" class="btn btn-primary center-block">Save</button> </div>
+ 							</form>
+          	</div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Lock In</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

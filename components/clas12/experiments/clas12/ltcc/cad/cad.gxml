@@ -1,0 +1,56 @@
+<gxml>
+	<volume name="S1-BB" color="ccccdd"   position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg"/>
+	<volume name="S1-BLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S1-BRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S1-BW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S1-LW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S1-RW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S1-TB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S1-TLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S1-TRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S2-BB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg"/>
+	<volume name="S2-BLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S2-BRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S2-BW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S2-LW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S2-RW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S2-TB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S2-TLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S2-TRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S3-BB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg"/>
+	<volume name="S3-BLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S3-BRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S3-BW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S3-LW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S3-RW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S3-TB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S3-TLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S3-TRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S4-BB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg"/>
+	<volume name="S4-BLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S4-BRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S4-BW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S4-LW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S4-RW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S4-TB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S4-TLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S4-TRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S5-BB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg"/>
+	<volume name="S5-BLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S5-BRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S5-BW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S5-LW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S5-RW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S5-TB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S5-TLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S5-TRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S6-BB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg"/>
+	<volume name="S6-BLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S6-BRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S6-BW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S6-LW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S6-RW" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S6-TB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S6-TLB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />
+	<volume name="S6-TRB" color="ccccdd"  position="0*mm 0*mm 1000*mm" rotation="180*deg 0*deg 60*deg" />		
+</gxml>
