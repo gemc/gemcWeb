@@ -55,9 +55,9 @@
   <div id="gui" class="container">
     <div>
       <h1>Results</h1>
-      <p class="lead">Eventually this page will have fancy graphs and other tools. For now click the download link to get results.</p>
+      <p class="lead">Eventually this page will have fancy graphs and other tools. For now click the download button to get results.</p>
       <br>
-      <a href = {{ url_for('fetch_results', project=project) }}> Download Results </a>
+        <a href = {{ url_for('fetch_results', project=project) }} class="btn btn-success btn-lg" role="button">Download Results</a>
     </div>
   </div>
 

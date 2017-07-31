@@ -96,7 +96,8 @@ $(function() {
 	$('#go').click(function() {
 		window.location.replace('/go');
 		$('#loading').append("<img src='/static/images/ajax-loader.gif' alt ='Loading GIF'>");
-		$('#loading').append("<h3>gemc is running on the server, awaiting results<h3>");
+		$('#loading').append("<h4>gemc is running on the server, awaiting results</h4>");
+    $('#compiling').append("<h4>Compiling</h4>")
 	});
 });
 

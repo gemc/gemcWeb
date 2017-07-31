@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, request, redirect, g, url_for, jsonify, send_file
-import os
+import os, datetime
 import scripts as s
 
 
@@ -114,7 +114,12 @@ def fetch_mc(project):
     if g.user:
         sendme = s.get_experiment_data(g.user, project, 'gl')
         name = project  + ' out'
-        return send_file(sendme, attachment_filename=name)
+        if os.path.exists(sendme):
+            return send_file(sendme, attachment_filename=name)
+        else:
+            return '''
+                <p>Error: File does not exist.</p>
+                '''
     return redirect(url_for('login'))
 
 @application.route('/_fetch_g/<project>')
@@ -122,7 +127,12 @@ def fetch_g(project):
     if g.user:
         sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + 'g.gcard'
         name = project + ' gcard'
-        return send_file(sendme, attachment_filename=name)
+        if os.path.exists(sendme):
+            return send_file(sendme, attachment_filename=name)
+        else:
+            return '''
+                <p>Error: File does not exist.</p>
+                '''
     return redirect(url_for('login'))
 
 @application.route('/_fetch_results/<project>')
@@ -130,7 +140,12 @@ def fetch_results(project):
     if g.user:
         sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + 'r.ev'
         name = project + ' results'
-        return send_file(sendme, attachment_filename=name)
+        if os.path.exists(sendme):
+            return send_file(sendme, attachment_filename=name)
+        else:
+            return '''
+                <p>Error: File does not exist.</p>
+                '''
     return redirect(url_for('login'))
 
 @application.route('/_fetch_out/<project>')
@@ -138,31 +153,39 @@ def fetch_out(project):
     if g.user:
         sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + 'out.txt'
         name = project  + ' out'
-        return send_file(sendme, attachment_filename=name)
+        if os.path.exists(sendme):
+            return send_file(sendme, attachment_filename=name)
+        else:
+            return '''
+                <p>Error: File does not exist.</p>
+                '''
     return redirect(url_for('login'))
 #####
 
 @application.route('/_new_experiment')
 def new_exp():
-	"""Loads a blank new experiment template"""
-	if g.user:
-		exps = s.get_experiment_list()
-		return render_template('newexperiment.html', exps=exps)
-	return redirect(url_for('login'))
+    """Loads a blank new experiment template"""
+    if g.user:
+        exps = s.get_experiment_list()
+        now = datetime.datetime.now()
+        tmp = now.strftime("%Y-%m-%d_%H:%M:%S")
+        session['exp'] = tmp
+        s.create_project_dir(g.user, tmp)
+        return render_template('newexperiment.html', exps=exps)
+    return redirect(url_for('login'))
 
 @application.route('/_name_&_abstract')
 def name_and_abstract():
-	"""Handles getting the name and abstract of a new experiment"""
-	if g.user:
-		title = request.args.get('title')
-		abstract = request.args.get('abstract')
-		session['exp'] = title
-		s.create_project_dir(g.user, session['exp'])
-		s.create_experiment_data(g.user, session['exp'])
-		s.write_experiment_data(g.user, session['exp'], 'title', title)
-		s.write_experiment_data(g.user, session['exp'], 'abstract', abstract)
+    """Handles getting the name and abstract of a new experiment"""
+    if g.user:
+        title = request.args.get('title')
+        abstract = request.args.get('abstract')
+        session['exp'] = s.rename_project_dir(g.user, session['exp'], title)
+        s.create_experiment_data(g.user, session['exp'])
+        s.write_experiment_data(g.user, session['exp'], 'title', title)
+        s.write_experiment_data(g.user, session['exp'], 'abstract', abstract)
         return jsonify(t = title, a = abstract)
-	return redirect(url_for('login'))
+    return redirect(url_for('login'))
 
 @application.route('/_gl_upload', methods=['POST'])
 def gl():

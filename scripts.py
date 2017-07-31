@@ -44,7 +44,12 @@ def get_user_projects(user):
 	dlst = []
 	for p in reversed(projects):
 		abstract = get_experiment_data(user, p, 'abstract')
-		abstract = str(abstract)[:40]
+		if abstract == -1:
+			abstract = "~empty project~"
+		elif abstract is "Nada":
+			abtract = "None found"
+		else:
+			abstract = str(abstract)[:40]
 		d = {"title" : p, "abstract" : abstract}
 		dlst.append(d)
 	return dlst
@@ -61,8 +66,6 @@ def get_experiment_list():
 def create_project_dir(user, experiment):
 	"""Creates a directory for an experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/')
-	if os.path.isdir(experiment):
-		shutil.rmtree(experiment, ignore_errors=True)
 	os.mkdir(experiment)
 
 def create_experiment_data(user, experiment):
@@ -76,6 +79,18 @@ def create_experiment_data(user, experiment):
 		f.write(str(gcard))
 		f.write(str(results))
 
+def rename_project_dir(user, experiment, title):
+	os.chdir(basedir + '/users/' + user + '/projects')
+	count = 1
+	while True:
+		if os.path.exists(title):
+			title = title + str(count)
+			count = int(count) + 1
+		else:
+			break
+	os.rename(experiment, title)
+	return title
+
 def write_experiment_data(user, experiment, part, content):
 	"""Writes to data file for specific experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/' + experiment)
@@ -86,13 +101,16 @@ def write_experiment_data(user, experiment, part, content):
 def get_experiment_data(user, experiment, part):
 	"""Gets part of data file for specific experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/' + experiment)
-	with open(experiment + '_data.txt' , 'r') as f:
-		lines = [x.strip('\n') for x in f.readlines()]
-		for l in lines:
-			if l.startswith(str(part)):
-				index = len(part) + 2
-				return l[index:]
-	return "Nada" #Nothing code
+	if not(os.path.exists(experiment + '_data.txt')):
+		return -1
+	else:
+		with open(experiment + '_data.txt' , 'r') as f:
+			lines = [x.strip('\n') for x in f.readlines()]
+			for l in lines:
+				if l.startswith(str(part)):
+					index = len(part) + 2
+					return l[index:]
+		return "Nada" #Nothing code
 
 def trim_ec(e):
 	"""Gets the user's experiment choice in usable form"""
