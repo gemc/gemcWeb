@@ -164,6 +164,17 @@ def fetch_out(project):
 # End of fetching methods
 #####
 
+
+@application.route('/_deleteme/<project>')
+def erase_proj(project):
+    """DANGER: Erases a project"""
+    if g.user:
+        import shutil
+        delete = basedir + '/users/' + g.user + '/projects/' + project
+        shutil.rmtree(delete, ignore_errors=True)        
+        return redirect(url_for('home'))
+    return redirect(url_for('login'))
+
 @application.route('/_new_experiment')
 def new_exp():
     """Loads a blank new experiment template"""

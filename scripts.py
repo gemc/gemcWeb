@@ -118,8 +118,19 @@ def write_experiment_data(user, experiment, part, content):
 	os.chdir(basedir + '/users/' + user +'/projects/' + experiment)
 	l = str(part) + ': ' + str(content)
 	l = str(l) + '\n'
-	with open(experiment + '_data.txt', 'a') as f:
-		f.write(l)
+
+	f = open(experiment + '_data.txt', 'r')
+	lines = f.readlines()
+	f.close
+
+	f = open(experiment + '_data.txt' ,'w')
+	for line in lines:
+		if line.startswith(part):
+			pass
+		else:
+			f.write(line)
+	f.write(str(l))
+	f.close()
 
 def get_experiment_data(user, experiment, part):
 	"""Gets part of data file for specific experiment"""
