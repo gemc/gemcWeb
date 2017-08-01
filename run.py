@@ -125,7 +125,7 @@ def fetch_mc(project):
 @application.route('/_fetch_g/<project>')
 def fetch_g(project):
     if g.user:
-        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + 'g.gcard'
+        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + project + '.gcard'
         name = project + ' gcard'
         if os.path.exists(sendme):
             return send_file(sendme, attachment_filename=name)
@@ -138,7 +138,7 @@ def fetch_g(project):
 @application.route('/_fetch_results/<project>')
 def fetch_results(project):
     if g.user:
-        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + 'r.ev'
+        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + project + '.ev'
         name = project + ' results'
         if os.path.exists(sendme):
             return send_file(sendme, attachment_filename=name)
@@ -151,7 +151,7 @@ def fetch_results(project):
 @application.route('/_fetch_out/<project>')
 def fetch_out(project):
     if g.user:
-        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + 'out.txt'
+        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + project +'_out.txt'
         name = project  + ' out'
         if os.path.exists(sendme):
             return send_file(sendme, attachment_filename=name)
@@ -160,6 +160,8 @@ def fetch_out(project):
                 <p>Error: File does not exist.</p>
                 '''
     return redirect(url_for('login'))
+#####
+# End of fetching methods
 #####
 
 @application.route('/_new_experiment')
@@ -171,6 +173,7 @@ def new_exp():
         tmp = now.strftime("%Y-%m-%d_%H:%M:%S")
         session['exp'] = tmp
         s.create_project_dir(g.user, tmp)
+        s.create_experiment_data(g.user, session['exp'])
         return render_template('newexperiment.html', exps=exps)
     return redirect(url_for('login'))
 
@@ -181,7 +184,6 @@ def name_and_abstract():
         title = request.args.get('title')
         abstract = request.args.get('abstract')
         session['exp'] = s.rename_project_dir(g.user, session['exp'], title)
-        s.create_experiment_data(g.user, session['exp'])
         s.write_experiment_data(g.user, session['exp'], 'title', title)
         s.write_experiment_data(g.user, session['exp'], 'abstract', abstract)
         return jsonify(t = title, a = abstract)
@@ -189,23 +191,23 @@ def name_and_abstract():
 
 @application.route('/_gl_upload', methods=['POST'])
 def gl():
-        """Handles getting the gl file of a new experiment"""
-	import uuid
-	from werkzeug import secure_filename
-	if g.user:
-		if request.method == 'POST':
-			files = request.files['file']
-			if files:
-				fn = secure_filename(files.filename)
-				filename = str(uuid.uuid4()) + secure_filename(files.filename)
-				application.logger.info('FileName: ' + filename)
-				updir = os.path.join(basedir, 'upload/')
-				files.save(os.path.join(updir, filename))
-				file_size = os.path.getsize(os.path.join(updir, filename))
-				gl = basedir + "/upload/" + filename
-				s.write_experiment_data(g.user, session['exp'], 'gl', gl)
-				return jsonify(name=fn, size=file_size)
-	return redirect(url_for('login'))
+    """Handles getting the gl file of a new experiment"""
+    import uuid
+    from werkzeug import secure_filename
+    if g.user:
+        if request.method == 'POST':
+            files = request.files['file']
+            if files:
+                fn = secure_filename(files.filename)
+                filename = str(uuid.uuid4()) + secure_filename(files.filename)
+                application.logger.info('FileName: ' + filename)
+                updir = os.path.join(basedir, 'upload/')
+                files.save(os.path.join(updir, filename))
+                file_size = os.path.getsize(os.path.join(updir, filename))
+                gl = basedir + "/upload/" + filename
+                s.write_experiment_data(g.user, session['exp'], 'gl', gl)
+                return jsonify(name=fn, size=file_size)
+    return redirect(url_for('login'))
 
 @application.route('/_ec')
 def ec():
@@ -232,7 +234,7 @@ def ao():
 	if g.user:
 		ao = s.trim_ao(request.args.get('advanced_select'))
 		s.write_experiment_data(g.user, session['exp'], 'ao', ao)
-		return jsonzify(test=ao)
+		return jsonify(test=ao)
 	return redirect(url_for('login'))
 
 @application.route('/go')

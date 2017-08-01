@@ -44,10 +44,10 @@ def get_user_projects(user):
 	dlst = []
 	for p in reversed(projects):
 		abstract = get_experiment_data(user, p, 'abstract')
-		if abstract == -1:
-			abstract = "~empty project~"
-		elif abstract is "Nada":
-			abtract = "None found"
+		if abstract is "Empty Project":
+			abstract = "Empty Project"
+		elif abstract is "None specified":
+			abtract = "None specified"
 		else:
 			abstract = str(abstract)[:40]
 		d = {"title" : p, "abstract" : abstract}
@@ -72,8 +72,8 @@ def create_experiment_data(user, experiment):
 	"""Creates the data file for specific experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/' + experiment)
 	create = 'created: ' + time.strftime('%d/%m/%Y') + '\n'
-	gcard = 'gcard: ' + basedir + '/users/' + user + 'projects/' + experiment + '/g.gcard\n'
-	results = 'results: ' + basedir + '/users/' + user + 'projects/' + experiment + '/r.ev\n'
+	gcard = 'gcard: ' + basedir + '/users/' + user + 'projects/' + experiment + '/' + experiment + '.gcard\n'
+	results = 'results: ' + basedir + '/users/' + user + 'projects/' + experiment + '/' + experiment + '.ev\n'
 	with open(experiment + '_data.txt', 'w+') as f:
 		f.write(str(create))
 		f.write(str(gcard))
@@ -89,12 +89,35 @@ def rename_project_dir(user, experiment, title):
 		else:
 			break
 	os.rename(experiment, title)
+	os.chdir(title)
+	os.rename(experiment + '_data.txt', title + '_data.txt')
+	oldgcard = 'gcard: ' + basedir + '/users/' + user + 'projects/' + experiment + '/' + experiment + '.gcard\n'
+	oldresults = 'results: ' + basedir + '/users/' + user + 'projects/' + experiment + '/' + experiment + '.ev\n'
+	gcard = 'gcard: ' + basedir + '/users/' + user + 'projects/' + title + '/' + title + '.gcard\n'
+	results = 'results: ' + basedir + '/users/' + user + 'projects/' + title + '/' + title + '.ev\n'
+
+	f = open(title + '_data.txt', 'r')
+	lines = f.readlines()
+	f.close
+
+	f = open(title + '_data.txt' ,'w')
+	f.write(str(gcard))
+	f.write(str(results))
+	for line in lines:
+		if line == oldgcard:
+			pass
+		elif line == oldresults:
+			pass
+		else:
+			f.write(line)
+	f.close()
 	return title
 
 def write_experiment_data(user, experiment, part, content):
 	"""Writes to data file for specific experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/' + experiment)
-	l = str(part) + ': ' + str(content) + '\n'
+	l = str(part) + ': ' + str(content)
+	l = str(l) + '\n'
 	with open(experiment + '_data.txt', 'a') as f:
 		f.write(l)
 
@@ -102,7 +125,7 @@ def get_experiment_data(user, experiment, part):
 	"""Gets part of data file for specific experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/' + experiment)
 	if not(os.path.exists(experiment + '_data.txt')):
-		return -1
+		return "Empty Project"
 	else:
 		with open(experiment + '_data.txt' , 'r') as f:
 			lines = [x.strip('\n') for x in f.readlines()]
@@ -110,7 +133,7 @@ def get_experiment_data(user, experiment, part):
 				if l.startswith(str(part)):
 					index = len(part) + 2
 					return l[index:]
-		return "Nada" #Nothing code
+		return "None specified" #Nothing code
 
 def trim_ec(e):
 	"""Gets the user's experiment choice in usable form"""
@@ -127,15 +150,16 @@ def get_ec_info(e, part):
 
 def trim_ao(a):
 	"""Gets the user's advanced options selections in uable form"""
-	a = a[1:-1]
+	a = a.translate(None, '[]"",')
+	print a
 	return a
 
 def gen_gcard(user, experiment):
 	"""Generates the gcard for new experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/' + experiment)
 
-	user_gcard = 'g.gcard'
-	user_out = 'r.ev'
+	user_gcard = experiment + '.gcard'
+	user_out = experiment + '.ev'
 	ec = None
 	ao_list = None
 	gl = None
@@ -147,9 +171,10 @@ def gen_gcard(user, experiment):
 				ec = l[4:]
 			if l.startswith('ao'):
 				a = l[4:]
-				ao_list = a.split(', ')
+				ao_list = a.split()
 			if l.startswith('gl') :
 				gl = l[4:]
+	print ao_list
 
 	with open(basedir + '/components/expjson/' + ec + '.json') as data_file:
 		stock_json = json.load(data_file)
@@ -180,9 +205,9 @@ def gen_gcard(user, experiment):
 def run_gemc(user,experiment):
 	"""runs gemc"""
 	os.chdir(basedir + '/users/' + user + '/projects/' + experiment) #change to correct dir
-	user_gcard = 'g.gcard'
+	user_gcard = experiment + '.gcard'
 
-	with open('out.txt', 'w+') as out: #running process
+	with open(experiment + '_out.txt', 'w+') as out: #running process
 		p = subprocess.Popen(args=['/bin/csh', '-c', "gemc " +  user_gcard + " -USE_GUI=0"], stdout=out)
 
 		while 1:
@@ -194,7 +219,7 @@ def run_gemc(user,experiment):
 			else:
 				if "Total gemc time:" in line:
 					print line
-					#kill gemc and close out.txt
+					#kill gemc and close experiment_out.txt
 					os.system('pkill -HUP gemc')
 					p.kill()
 					out.close()
@@ -202,7 +227,7 @@ def run_gemc(user,experiment):
 					return True
 				elif "Abort" in line:
 					print line
-					#kill gemc and close out.txt
+					#kill gemc and close experimemt_out.txt
 					os.system('pkill -HUP gemc')
 					p.kill()
 					out.close()

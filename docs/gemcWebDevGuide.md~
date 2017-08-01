@@ -228,13 +228,7 @@ For completely new developers wanting to work on a project, gemcWeb is a
 good option. In the original implementation I attempted to design the soft-
 ware with as much straight forward code as possible, although as greater
 amounts of abstraction become the norm, this gets exponentially less easy
-to do.
-
-### Client Server Model
-
-To ease the process of getting familar with the code, appeneded to this section is a diagram of the client server model for gemcWeb:
-
-![Client Server Model gemcWeb](https://github.com/https://github.com/gemc/gemcWeb/tree/master/docs/gemcWebFlow.png "Client Server gemcWeb")
+to do. 
 
 ### Testing
 

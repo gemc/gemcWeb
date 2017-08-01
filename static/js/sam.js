@@ -82,7 +82,7 @@ $(function() {
 		array = $("input[name='aoCB']:checked").map(function() {
 			return this.value;
 		}).get();
-		$.getJSON('/_process_advanced', {
+		$.getJSON('/_ao', {
 				advanced_select: JSON.stringify(array)
 			},
 			function(data) {
