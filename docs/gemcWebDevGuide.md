@@ -234,7 +234,7 @@ to do.
 
 To ease the process of getting familar with the code, appeneded to this section is a diagram of the client server model for gemcWeb:
 
-![Client Server Model gemcWeb](https://github.com/https://github.com/gemc/gemcWeb/tree/master/docs/gemcWebFlow.png "Client Server gemcWeb")
+![Client Server Model gemcWeb](gemcWeb/docs/gemcWebFlow.png  "Client Server gemcWeb")
 
 ### Testing
 
