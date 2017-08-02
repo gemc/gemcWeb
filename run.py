@@ -171,7 +171,7 @@ def erase_proj(project):
     if g.user:
         import shutil
         delete = basedir + '/users/' + g.user + '/projects/' + project
-        shutil.rmtree(delete, ignore_errors=True)        
+        shutil.rmtree(delete, ignore_errors=True)
         return redirect(url_for('home'))
     return redirect(url_for('login'))
 
@@ -254,13 +254,24 @@ def go():
     if g.user:
         s.gen_gcard(g.user, session['exp'])
         if s.run_gemc(g.user, session['exp']):
-            project = session['exp']
-            return render_template('results.html', project=project)
+            code = "gemc run successfully"
+            return jsonify(code=code)
         else:
             return '''
             <p>These is an error, please go back and check generator library file.</p>
             '''
             return redirect(url_for('login'))
+
+@application.route('/_sess_ex_res')
+def session_exp_res ():
+    """Handles sending results for project that is just completed"""
+    if g.user:
+        project = session['exp']
+        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + project + '.ev'
+        name = project + ' results'
+        return send_file(sendme, attachment_filename=name)
+    return redirect(url_for('login'))
+
 
 if __name__ == '__main__':
     application.run()

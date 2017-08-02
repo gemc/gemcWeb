@@ -45,9 +45,9 @@ $(document).ready(function() {
  //This saves experiment option, loads the experiment description
 $(function() {
 	$('#experiment_select').click(function() {
-		$('#experiment_description').empty()
+		$('#experiment_description').empty();
 		$('#button_for_ao').empty();
-		$('#DSdisplay').empty()
+		$('#DSdisplay').empty();
 		$.getJSON('/_ec', {
 			x_sel: $("input[name='expradio']:checked").parent('label').text(),
 		}, function(data) {
@@ -92,13 +92,23 @@ $(function() {
 	});
 });
 
+//This saves experiment option, loads the experiment description
 $(function() {
-	$('#go').click(function() {
-		window.location.replace('/go');
-		$('#loading').append("<img src='/static/images/ajax-loader.gif' alt ='Loading GIF'>");
-		$('#loading').append("<h4>gemc is running on the server, awaiting results</h4>");
-    $('#compiling').append("<h4>Compiling</h4>")
-	});
+ $('#go').click(function() {
+   $('#loading').append("<img src='/static/images/ajax-loader.gif' alt ='Loading GIF'>");
+   $('#loading').append("<h4>gemc is running on the server, awaiting results</h4>");
+   $('#compiling').append("<h4>Compiling</h4>");
+   $.getJSON('/go', {
+     dummy: "yes",
+   }, function(data) {
+     console.log(data.code);
+     $('#loading').empty();
+     $('#compiling').empty();
+     $('#loading').append("<h4>Completed. Results available.");
+     $('#resultsBtn').removeAttr('hidden');
+   });
+   return false;
+ });
 });
 
 });

@@ -2,12 +2,25 @@ import os, hashlib, json, subprocess, time, shutil
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+salt = "salty" #Generate a salt for security, do not use 'salty'
+
+"""
+To generate a salt run CL Python and run the following:
+
+>>> import random
+>>> ''.join(random.choice('0123456789abcdefghijklmnopqrstuvwxyz') for i in range(32))
+
+Copy and paste this as your salt
+"""
+
 def create_account(user, password):
 	"""Checks for new account validity. If valid, creates account"""
 	if os.path.isdir(basedir + '/users/' + user):
 		return False
 	else:
 		#hashing and salting the password
+		global salt
+		password = password + salt
 		hash_object = hashlib.sha256(password)
 		hex_dig = hash_object.hexdigest()
 		#creating user directory and storing pasword
@@ -27,6 +40,8 @@ def account_exists(user):
 
 def check_password(password):
 	"""Returns a hashed version of password for log in check"""
+	global salt
+	password = password + salt
 	hash_object = hashlib.sha256(password)
 	hex_dig = hash_object.hexdigest()
 	return hex_dig
@@ -161,7 +176,9 @@ def get_ec_info(e, part):
 
 def trim_ao(a):
 	"""Gets the user's advanced options selections in uable form"""
-	a = a.translate(None, '[]"",')
+	chars = ['[', ']', '"' ,',']
+	for ch in chars:
+		a = a.replace(ch,"")
 	print a
 	return a
 
@@ -185,7 +202,6 @@ def gen_gcard(user, experiment):
 				ao_list = a.split()
 			if l.startswith('gl') :
 				gl = l[4:]
-	print ao_list
 
 	with open(basedir + '/components/expjson/' + ec + '.json') as data_file:
 		stock_json = json.load(data_file)
@@ -194,9 +210,9 @@ def gen_gcard(user, experiment):
 	if not(ao_list is None): #writing actual gcard, sees if ao used or not
 		fo = open(user_gcard, "wb")
 		fo.write("<gcard>" + '\n')
-		for e in relevant_detectors:
-			if e in ao_list:
-				fo.write(e["tag"] + '\n')
+		for d in relevant_detectors:
+			if d["name"] in ao_list:
+				fo.write(d["tag"] + '\n')
 			else:
 				pass
 		fo.write("<option name ='INPUT_GEN_FILE' value='lund,"+ gl +"'/>" + '\n')
@@ -206,8 +222,9 @@ def gen_gcard(user, experiment):
 	else:
 		fo = open(user_gcard, "wb")
 		fo.write("<gcard>" + '\n')
-		for e in relevant_detectors:
-			fo.write(e["tag"] + '\n')
+		for d in relevant_detectors:
+			print(d)
+			fo.write(d["tag"] + '\n')
 		fo.write("<option name ='INPUT_GEN_FILE' value='lund,"+ gl +"'/>" + '\n')
 		fo.write("<option name='OUTPUT' value='evio," + user_out + "'/>" +'\n')
 		fo.write("</gcard>" + '\n')
@@ -215,11 +232,14 @@ def gen_gcard(user, experiment):
 
 def run_gemc(user,experiment):
 	"""runs gemc"""
+	import signal
 	os.chdir(basedir + '/users/' + user + '/projects/' + experiment) #change to correct dir
 	user_gcard = experiment + '.gcard'
 
 	with open(experiment + '_out.txt', 'w+') as out: #running process
 		p = subprocess.Popen(args=['/bin/csh', '-c', "gemc " +  user_gcard + " -USE_GUI=0"], stdout=out)
+
+		child_pid = p.pid
 
 		while 1:
 			where = out.tell()
@@ -231,16 +251,14 @@ def run_gemc(user,experiment):
 				if "Total gemc time:" in line:
 					print line
 					#kill gemc and close experiment_out.txt
-					os.system('pkill -HUP gemc')
-					p.kill()
+					os.kill(child_pid, signal.SIGTERM)
 					out.close()
 					#return True for success
 					return True
 				elif "Abort" in line:
 					print line
 					#kill gemc and close experimemt_out.txt
-					os.system('pkill -HUP gemc')
-					p.kill()
+					os.kill(child_pid, signal.SIGTERM)
 					out.close()
 					#return False for failure:
 					return False
