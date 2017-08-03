@@ -18,7 +18,7 @@ def login():
         p = request.form['password']
 
         if not(s.account_exists(u)):
-            return "Account not found, go back and create one"
+            return "Account not found, go back and create one or try again if you do have an accout."
         else:
             pass
 
