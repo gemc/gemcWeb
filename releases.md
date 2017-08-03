@@ -26,8 +26,8 @@ Planned updates:
 ## Major updates with unplanned release dates
 
 * In browser data interpretation
-..* Visualization of simulation events
-..* Visualization of events
+  * Visualization of simulation events
+  * Visualization of events
 * Share project feature
 * Create MC events
 * Create gcard
