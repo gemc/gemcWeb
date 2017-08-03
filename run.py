@@ -262,13 +262,33 @@ def go():
             '''
             return redirect(url_for('login'))
 
-@application.route('/_sess_ex_res')
-def session_exp_res ():
+@application.route('/exp_res')
+def exp_res ():
     """Handles sending results for project that is just completed"""
     if g.user:
         project = session['exp']
         sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + project + '.ev'
         name = project + ' results'
+        return send_file(sendme, attachment_filename=name)
+    return redirect(url_for('login'))
+
+@application.route('/exp_g')
+def exp_g ():
+    """Handles sending gcard for project that is just completed"""
+    if g.user:
+        project = session['exp']
+        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + project + '.gcard'
+        name = project + ' gcard'
+        return send_file(sendme, attachment_filename=name)
+    return redirect(url_for('login'))
+
+@application.route('/exp_log')
+def exp_log ():
+    """Handles sending gemc log for project that is just completed"""
+    if g.user:
+        project = session['exp']
+        sendme = basedir + '/users/' + g.user + '/projects/' + project + '/' + project + '_out.txt'
+        name = project + ' gemc log'
         return send_file(sendme, attachment_filename=name)
     return redirect(url_for('login'))
 
