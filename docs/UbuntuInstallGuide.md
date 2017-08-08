@@ -11,9 +11,9 @@ sudo apt-get -y install g++ mysql-client libmysqlclient-dev libx11-dev libxext-d
 ## Creating a working directory and get the install package
 
 ```bash
-sudo chown <username> /opt
-
 mkdir /opt/jlab_software
+
+sudo chown <username> /opt/jlab_software
 
 cd /opt/jlab_software
 
