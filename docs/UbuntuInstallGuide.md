@@ -5,7 +5,7 @@
 ## Install dependencies
 
 ```bash
-sudo apt-get -y install g++ mysql-client libmysqlclient-dev libx11-dev libxext-dev libglu1-mesa-dev libext-dev libxmu-dev libxrender-dev libexpat1-dev tcsh cmake libadterimage-dev scons
+sudo apt-get -y install g++ mysql-client libmysqlclient-dev libx11-dev libxext-dev libglu1-mesa-dev libxt-dev libxmu-dev libxrender-dev libexpat1-dev tcsh cmake libafterimage-dev scons
 ```
 
 ## Creating a working directory and get the install package
