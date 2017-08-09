@@ -33,10 +33,5 @@ Planned updates:
 * Create gcard
 * Run projects in parallel
 
-## Major updates with unplanned release dates specfic to JLab Version
-
-* connect with CUE environment
-* connect with farm
-* database
 
 
