@@ -39,11 +39,11 @@ def create_account():
 
         if s.create_account(u,p):
             return '''
-                <p>Account creation successful, go to <a href="/"> log in</a></p>
+                <p>Account creation successful, go to <a href={{ url_for('login') }}> log in</a></p>
                 '''
         else:
             return '''
-                <p>Username taken, go <a href="/createaccount"> try again</a></p>
+                <p>Username taken, go <a href={{ url_for('create_account') }}> try again</a></p>
                 '''
     return render_template('createaccount.html')
 
