@@ -26,10 +26,19 @@ def create_account(user, password):
 		#creating user directory and storing pasword
 		os.mkdir(basedir + '/users/' + user)
 		os.chdir(basedir+ '/users/' + user)
-		os.mkdir('projects')
 		with open ('pwd.txt' , 'w') as f:
 			f.write(hex_dig + '\n')
-			return True
+		os.mkdir('projects')
+		make_libs()
+		return True
+
+def make_libs():
+	"""Makes user libraries"""
+	os.mkdir('libs')
+	os.chdir('libs')
+	os.mkdir('mc')
+	os.mkdir('gcards')
+	os.mkdir('results')
 
 def account_exists(user):
 	"""Checks if user account exists"""
@@ -230,11 +239,16 @@ def gen_gcard(user, experiment):
 		fo.write("</gcard>" + '\n')
 		fo.close()
 
+
 def run_gemc(user,experiment):
 	"""runs gemc"""
 	import signal
 	os.chdir(basedir + '/users/' + user + '/projects/' + experiment) #change to correct dir
 	user_gcard = experiment + '.gcard'
+
+	#copy over gcard to libraries
+	gcard_dir = basedir + '/users/' + user + '/libs/gcards/'
+	shutil.copy(user_gcard, gcard_dir)
 
 	with open(experiment + '_out.txt', 'w+') as out: #running process
 		p = subprocess.Popen(args=['/bin/csh', '-c', "gemc " +  user_gcard + " -USE_GUI=0"], stdout=out)
@@ -253,6 +267,9 @@ def run_gemc(user,experiment):
 					#kill gemc and close experiment_out.txt
 					os.kill(child_pid, signal.SIGTERM)
 					out.close()
+					#copy over results to libraries
+					res_dir = basedir + '/users/' + user + '/libs/results/'
+					shutil.copy(out, res_dir)
 					#return True for success
 					return True
 				elif "Abort" in line:

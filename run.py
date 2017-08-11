@@ -38,12 +38,10 @@ def create_account():
         p = request.form['password']
 
         if s.create_account(u,p):
-            return '''
-                <p>Account creation successful, go to <a href={{ url_for('login') }}> log in</a></p>
-                '''
+            return redirect(url_for('login'))
         else:
             return '''
-                <p>Username taken, go <a href={{ url_for('create_account') }}> try again</a></p>
+                <p>Username taken, go back and try again</a></p>
                 '''
     return render_template('createaccount.html')
 
@@ -205,6 +203,7 @@ def gl():
     """Handles getting the gl file of a new experiment"""
     import uuid
     from werkzeug import secure_filename
+    from shutil import copy
     if g.user:
         if request.method == 'POST':
             files = request.files['file']
@@ -216,6 +215,11 @@ def gl():
                 files.save(os.path.join(updir, filename))
                 file_size = os.path.getsize(os.path.join(updir, filename))
                 gl = basedir + "/upload/" + filename
+
+                #copy over Monte Carlo to libraries
+            	mc_dir = basedir + '/users/' + session['user'] + '/libs/mc/'
+            	copy(gl, mc_dir)
+
                 s.write_experiment_data(g.user, session['exp'], 'gl', gl)
                 return jsonify(name=fn, size=file_size)
     return redirect(url_for('login'))
