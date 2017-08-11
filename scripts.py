@@ -137,6 +137,22 @@ def rename_project_dir(user, experiment, title):
 	f.close()
 	return title
 
+def clone_project(user, experiment):
+	"""Clone project, same as edit, but keeps original project files"""
+	os.chdir(basedir + '/users/' + user + '/projects')
+
+	count = 1
+	clone_title = experiment + '_clone' + str(count)
+
+	while True:
+		if os.path.exists(title):
+			clone_title = title + str(count)
+			count = int(count) + 1
+		else:
+			break
+
+	shutil.copy(experiment, clone_title)
+
 def write_experiment_data(user, experiment, part, content):
 	"""Writes to data file for specific experiment"""
 	os.chdir(basedir + '/users/' + user +'/projects/' + experiment)
