@@ -145,13 +145,14 @@ def clone_project(user, experiment):
 	clone_title = experiment + '_clone' + str(count)
 
 	while True:
-		if os.path.exists(title):
-			clone_title = title + str(count)
+		if os.path.exists(clone_title):
+			clone_title = clone_title + str(count)
 			count = int(count) + 1
 		else:
 			break
 
-	shutil.copy(experiment, clone_title)
+	shutil.copytree(experiment, clone_title)
+	return clone_title
 
 def write_experiment_data(user, experiment, part, content):
 	"""Writes to data file for specific experiment"""
@@ -285,7 +286,7 @@ def run_gemc(user,experiment):
 					out.close()
 					#copy over results to libraries
 					res_dir = basedir + '/users/' + user + '/libs/results/'
-					shutil.copy(out, res_dir)
+					shutil.copy(experiment + '_out.txt', res_dir)
 					#return True for success
 					return True
 				elif "Abort" in line:

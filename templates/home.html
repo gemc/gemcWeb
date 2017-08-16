@@ -53,6 +53,8 @@
 
   <!-- Home GUI-->
   <div id="gui" class="container">
+    <a href= {{ url_for('new_exp') }} class="btn btn-primary btn-lg pull-right" role="button"><b>+ New Project</b></a>
+    <br>
     <h1> {{ user }} </h1>
     <br>
     <div class="panel panel-primary">
@@ -85,17 +87,17 @@
         <table class="table table-condensed">
           <thead>
             <tr>
-              <th>Project</th>
+              <th>Project (edit)</th>
               <th>Abstract</th>
-              <th>View</th>
+              <th>Clone</th>
             </tr>
           </thead>
           <tbody>
             {% for p in projects %}
             <tr>
-              <td> {{ p['title'] }} </td>
+              <td> <a href= {{ url_for('edit', project=p['title']) }}> {{ p['title'] }} </a> </td>
               <td> {{ p['abstract'] }} </td>
-              <td> <a href= {{ url_for('details', project=p['title']) }} class="btn btn-success btn-sm" role="button">Details</a>
+              <td> <a href= {{ url_for('clone', project=p['title']) }} class="btn btn-success btn-xs" role="button">Clone</a> </td>
             </tr>
             {% endfor %}
           </tbody>

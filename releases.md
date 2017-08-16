@@ -10,7 +10,7 @@ This is the current official version of gemcWeb. It is the test version.
 
 (upcoming)
 
-This is going to be version that is deployed on an internal server at JLab. It will be very similar to, if not exactly the same as, the test version. Any changes will be related to configuring it for Apache deployment. 
+This is going to be version that is deployed on an internal server at JLab. It will be very similar to, if not exactly the same as, the test version. Any changes will be related to configuring it for Apache deployment.
 
 ## gemcWeb v0.3
 
@@ -32,6 +32,3 @@ Planned updates:
 * Create MC events
 * Create gcard
 * Run projects in parallel
-
-
-
