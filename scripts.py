@@ -135,6 +135,17 @@ def rename_project_dir(user, experiment, title):
 		else:
 			f.write(line)
 	f.close()
+
+	if os.path.exists(experiment + '.gcard'):
+		os.rename(experiment + '.gcard', title + '.gcard')
+	else:
+		pass
+
+	if os.path.exists(experiment+ '.ev'):
+		os.rename(experiment + '.ev', title + '.ev')
+	else:
+		pass
+
 	return title
 
 def clone_project(user, experiment):
@@ -152,6 +163,40 @@ def clone_project(user, experiment):
 			break
 
 	shutil.copytree(experiment, clone_title)
+
+	os.chdir(clone_title)
+	os.rename(experiment + '_data.txt', clone_title + '_data.txt')
+	oldgcard = 'gcard: ' + basedir + '/users/' + user + 'projects/' + experiment + '/' + experiment + '.gcard\n'
+	oldresults = 'results: ' + basedir + '/users/' + user + 'projects/' + experiment + '/' + experiment + '.ev\n'
+	gcard = 'gcard: ' + basedir + '/users/' + user + 'projects/' + clone_title + '/' + clone_title + '.gcard\n'
+	results = 'results: ' + basedir + '/users/' + user + 'projects/' + clone_title + '/' + clone_title + '.ev\n'
+
+	f = open(clone_title + '_data.txt', 'r')
+	lines = f.readlines()
+	f.close
+
+	f = open(clone_title + '_data.txt' ,'w')
+	f.write(str(gcard))
+	f.write(str(results))
+	for line in lines:
+		if line == oldgcard:
+			pass
+		elif line == oldresults:
+			pass
+		else:
+			f.write(line)
+	f.close()
+
+	if os.path.exists(experiment + '.gcard'):
+		os.rename(experiment + '.gcard', clone_title + '.gcard')
+	else:
+		pass
+
+	if os.path.exists(experiment+ '.ev'):
+		os.rename(experiment + '.ev', clone_title + '.ev')
+	else:
+		pass
+
 	return clone_title
 
 def write_experiment_data(user, experiment, part, content):

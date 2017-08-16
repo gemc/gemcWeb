@@ -200,7 +200,7 @@ def clone(project):
         gl = s.get_experiment_data(g.user, clone, 'gl')
         ec = s.get_experiment_data(g.user, clone, 'ec')
         fn = s.get_experiment_data(g.user, clone, 'fn')
-        return render_template('edit.html', clone=clone, abstract=abstract, gl=gl, ec=ec, fn=fn)
+        return render_template('clone.html', clone=clone, abstract=abstract, gl=gl, ec=ec, fn=fn)
     return redirect(url_for('login'))
 
 @app.route('/_name_&_abstract')
@@ -228,7 +228,7 @@ def gl():
                 fn = secure_filename(files.filename)
                 filename = str(uuid.uuid4()) + secure_filename(files.filename)
 
-                s.write_experiment_data(g.user, session['exp'], 'fn', filename)
+                s.write_experiment_data(g.user, session['exp'], 'fn', fn)
 
                 app.logger.info('FileName: ' + filename)
                 updir = os.path.join(basedir, 'upload/')
