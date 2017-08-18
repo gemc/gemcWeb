@@ -4,7 +4,7 @@ import accounts as a
 import file_handling as f
 import run_project as r
 
-PROJ_DIR = /group/clas/www/gemc2017/html/
+PROJ_DIR = /group/clas/www/gemc2017/html/gemcWeb
 
 application = Flask(__name__)
 application.secret_key = or.urandom(24)
