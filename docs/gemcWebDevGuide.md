@@ -92,8 +92,8 @@ The following is the directory structure of gemcWeb, highlighting important file
 ~/gemcWeb
 |-- gemc.py
 |-- accounts.py
-|-- run_project.py
-|-- file_handling.py
+|-- run.py
+|-- file.py
 |__ /static
 	|__ /css
 	|__ /fonts
@@ -103,7 +103,7 @@ The following is the directory structure of gemcWeb, highlighting important file
 |__ /templates
 
 
-#### run.py
+#### gemc.py
 
 This file is the back end. It contains a Flask configuration section, and handles the back end tasks. This includes URL routing, handling user data, and calling scripts that run gemc and such.
 
@@ -111,11 +111,11 @@ This file is the back end. It contains a Flask configuration section, and handle
 
 This handles account creation and login.
 
-#### file_handling.py
+#### file.py
 
 This handles not anything be written or received from the file system.
 
-#### run_project.py
+#### run.py
 
 This handles getting data from the newexperiment template and running gemc.
 

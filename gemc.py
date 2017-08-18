@@ -1,8 +1,8 @@
 from flask import Flask, render_template, session, request, redirect, g, url_for, jsonify, send_file
 import os, datetime
 import accounts as a
-import file_handling as f
-import run_project as r
+import filemgt as f
+import runproj as r
 
 PROJ_DIR = "/group/clas/www/gemc2017/html/gemcWeb"
 
