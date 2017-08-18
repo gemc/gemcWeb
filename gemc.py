@@ -7,7 +7,7 @@ import run_project as r
 PROJ_DIR = "/group/clas/www/gemc2017/html/gemcWeb"
 
 app = Flask(__name__)
-app.secret_key = or.urandom(24)
+app.secret_key = os.urandom(24)
 
 @app.route('/', methods=['GET' , 'POST'])
 def login():
@@ -252,7 +252,7 @@ def go():
     """Generates the gcard, runs gemc and returns results of a new experiment"""
     if g.user:
         r.gen_gcard(g.user, session['exp'])
-        if s.run_gemc(g.user, session['exp']):
+        if r.run_gemc(g.user, session['exp']):
             code = "gemc run successfully"
             return jsonify(code=code)
         else:
