@@ -4,12 +4,12 @@ import accounts as a
 import file_handling as f
 import run_project as r
 
-PROJ_DIR = /group/clas/www/gemc2017/html/gemcWeb
+PROJ_DIR = "/group/clas/www/gemc2017/html/gemcWeb"
 
-application = Flask(__name__)
-application.secret_key = or.urandom(24)
+app = Flask(__name__)
+app.secret_key = or.urandom(24)
 
-@application.route('/', methods=['GET' , 'POST'])
+@app.route('/', methods=['GET' , 'POST'])
 def login():
     """Renders the log in template, allows for account creation, page bounces back if credentials are incorrrect"""
     if request.method == 'POST':
@@ -29,7 +29,7 @@ def login():
 
     return render_template('login.html')
 
-@application.route('/createaccount', methods=['GET' , 'POST'])
+@app.route('/createaccount', methods=['GET' , 'POST'])
 def create_account():
     """Handles account creation"""
     if request.method == 'POST':
@@ -47,25 +47,25 @@ def create_account():
     return render_template('createaccount.html')
 
 
-@application.route('/about')
+@app.route('/about')
 def about():
     """Renders the about page"""
     return render_template('about.html')
 
 
-@application.route('/docs')
+@app.route('/docs')
 def docs():
     """ Renders the docs page"""
     return render_template('docs.html')
 
-@application.before_request
+@app.before_request
 def before_request():
     """Session handling"""
     g.user = None
     if 'user' in session:
         g.user = session['user']
 
-@application.route('/home')
+@app.route('/home')
 def home():
     """Renders the user's homepage, including there existing projects in tabular form"""
     if g.user:
@@ -74,7 +74,7 @@ def home():
         return render_template('home.html', user=user, projects=projects)
     return redirect(url_for('login'))
 
-@application.route('/projlst')
+@app.route('/projlst')
 def proj_lst():
     """Renders the user's projects in tabular form"""
     if g.user:
@@ -83,7 +83,7 @@ def proj_lst():
         return render_template('projectlst.html', user=user, projects=projects)
     return redirect(url_for('login'))
 
-@application.route('/view/<project>')
+@app.route('/view/<project>')
 def details(project):
     """Renders the details page for a user's specific project"""
     if g.user:
@@ -91,14 +91,14 @@ def details(project):
         return render_template('view.html', project=project, abstract=abstract)
     return redirect(url_for('login'))
 
-@application.route('/aboutin')
+@app.route('/aboutin')
 def aboutin():
     """Renders the about page"""
     if g.user:
         return render_template('aboutin.html')
     return redirect(url_for('login'))
 
-@application.route('/docsin')
+@app.route('/docsin')
 def docsin():
     """ Renders the docs page"""
     if g.user:
@@ -108,7 +108,7 @@ def docsin():
 #####
 #The following fetch files of existing projects
 #####
-@application.route('/_fetch_mc/<project>')
+@app.route('/_fetch_mc/<project>')
 def fetch_mc(project):
     if g.user:
         sendme = f.get_experiment_data(g.user, project, 'gl')
@@ -121,7 +121,7 @@ def fetch_mc(project):
                 '''
     return redirect(url_for('login'))
 
-@application.route('/_fetch_g/<project>')
+@app.route('/_fetch_g/<project>')
 def fetch_g(project):
     if g.user:
         sendme = PROJ_DIR + '/users/' + g.user + '/projects/' + project + '/' + project + '.gcard'
@@ -134,7 +134,7 @@ def fetch_g(project):
                 '''
     return redirect(url_for('login'))
 
-@application.route('/_fetch_results/<project>')
+@app.route('/_fetch_results/<project>')
 def fetch_results(project):
     if g.user:
         sendme = PROJ_DIR + '/users/' + g.user + '/projects/' + project + '/' + project + '.ev'
@@ -147,7 +147,7 @@ def fetch_results(project):
                 '''
     return redirect(url_for('login'))
 
-@application.route('/_fetch_out/<project>')
+@app.route('/_fetch_out/<project>')
 def fetch_out(project):
     if g.user:
         sendme = PROJ_DIR + '/users/' + g.user + '/projects/' + project + '/' + project +'_out.txt'
@@ -164,7 +164,7 @@ def fetch_out(project):
 #####
 
 
-@application.route('/_deleteme/<project>')
+@app.route('/_deleteme/<project>')
 def erase_proj(project):
     """DANGER: Erases a project"""
     if g.user:
@@ -174,7 +174,7 @@ def erase_proj(project):
         return redirect(url_for('home'))
     return redirect(url_for('login'))
 
-@application.route('/_new_experiment')
+@app.route('/_new_experiment')
 def new_exp():
     """Loads a blank new experiment template"""
     if g.user:
@@ -187,7 +187,7 @@ def new_exp():
         return render_template('newexperiment.html', exps=exps)
     return redirect(url_for('login'))
 
-@application.route('/_name_&_abstract')
+@app.route('/_name_&_abstract')
 def name_and_abstract():
     """Handles getting the name and abstract of a new experiment"""
     if g.user:
@@ -199,7 +199,7 @@ def name_and_abstract():
         return jsonify(t = title, a = abstract)
     return redirect(url_for('login'))
 
-@application.route('/_gl_upload', methods=['POST'])
+@app.route('/_gl_upload', methods=['POST'])
 def gl():
     """Handles getting the gl file of a new experiment"""
     import uuid
@@ -210,7 +210,7 @@ def gl():
             if files:
                 fn = secure_filename(files.filename)
                 filename = str(uuid.uuid4()) + secure_filename(files.filename)
-                application.logger.info('FileName: ' + filename)
+                app.logger.info('FileName: ' + filename)
                 updir = os.path.join(PROJ_DIR, 'upload/')
                 files.save(os.path.join(updir, filename))
                 file_size = os.path.getsize(os.path.join(updir, filename))
@@ -219,7 +219,7 @@ def gl():
                 return jsonify(name=fn, size=file_size)
     return redirect(url_for('login'))
 
-@application.route('/_ec')
+@app.route('/_ec')
 def ec():
 	"""Handles getting the experiment choice of a new experiment"""
 	if g.user:
@@ -229,7 +229,7 @@ def ec():
 		return jsonify(edes=edes)
 	return redirect(url_for('login'))
 
-@application.route('/_display_ao')
+@app.route('/_display_ao')
 def display_ao():
 	"""Handles displaying the advanced options of an experiment"""
 	if g.user:
@@ -238,7 +238,7 @@ def display_ao():
 		return jsonify(advanced=edet)
 	return redirect(url_for('login'))
 
-@application.route('/_ao')
+@app.route('/_ao')
 def ao():
 	"""Handles getting the ao if selected of a new experiment"""
 	if g.user:
@@ -247,7 +247,7 @@ def ao():
 		return jsonify(test=ao)
 	return redirect(url_for('login'))
 
-@application.route('/go')
+@app.route('/go')
 def go():
     """Generates the gcard, runs gemc and returns results of a new experiment"""
     if g.user:
@@ -261,7 +261,7 @@ def go():
             '''
             return redirect(url_for('login'))
 
-@application.route('/exp_res')
+@app.route('/exp_res')
 def exp_res ():
     """Handles sending results for project that is just completed"""
     if g.user:
@@ -271,7 +271,7 @@ def exp_res ():
         return send_file(sendme, attachment_filename=name)
     return redirect(url_for('login'))
 
-@application.route('/exp_g')
+@app.route('/exp_g')
 def exp_g ():
     """Handles sending gcard for project that is just completed"""
     if g.user:
@@ -281,7 +281,7 @@ def exp_g ():
         return send_file(sendme, attachment_filename=name)
     return redirect(url_for('login'))
 
-@application.route('/exp_log')
+@app.route('/exp_log')
 def exp_log ():
     """Handles sending gemc log for project that is just completed"""
     if g.user:
@@ -293,4 +293,4 @@ def exp_log ():
 
 
 if __name__ == '__main__':
-    application.run()
+    app.run()
