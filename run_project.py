@@ -1,6 +1,6 @@
 import os, json, subprocess, time,
 
-PROJ_DIR = /group/clas/www/gemc2017/html/
+PROJ_DIR = /group/clas/www/gemc2017/html/gemcWeb
 
 def trim_ec(e):
 	"""Gets the user's experiment choice in usable form"""
