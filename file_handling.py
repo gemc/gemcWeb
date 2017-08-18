@@ -1,6 +1,6 @@
 import os,time
 
-PROJ_DIR = /group/clas/www/gemc2017/html/
+PROJ_DIR = /group/clas/www/gemc2017/html/gemcWeb
 
 def get_user_projects(user):
 	"""Gets user projects and abstract to display on homepage"""
