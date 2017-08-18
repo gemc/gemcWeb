@@ -1,6 +1,6 @@
 import os, hashlib
 
-PROJ_DIR = /group/clas/www/gemc2017/html/
+PROJ_DIR = /group/clas/www/gemc2017/html/gemcWeb
 
 def get_salty():
 	"""Gets the salt"""
