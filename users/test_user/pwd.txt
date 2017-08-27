@@ -1,0 +1,1 @@
+This is where the salted + hashed password would go. It is a one line text file as that is what the password file needs to be.

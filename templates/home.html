@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Home</title>
+
+  <!-- Bootstrap -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/static/js/bootstrap.min.js"></script>
+
+  <!-- Proper page allignemnt for the gui-->
+  <style>
+    #gui {
+      position: relative;
+      margin-top: 5%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">gemcWeb</a>
+      </div>
+      <div id="navbar" class="navbar-nav">
+        <ul class="nav navbar-nav">
+          <li><a href= {{ url_for('home') }} class="active">Home</a></li>
+          <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href= {{ url_for('new_exp') }}>New Project</a></li>
+                  <li><a href= {{ url_for('proj_lst') }}>Projects</a></li>
+                </ul>
+              </li>
+          <li><a href= {{ url_for('aboutin') }}>About</a></li>
+          <li><a href= {{ url_for('docsin') }} >Docs</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home GUI-->
+  <div id="gui" class="container">
+    <a href= {{ url_for('new_exp') }} class="btn btn-primary btn-lg pull-right" role="button"><b>+ New Project</b></a>
+    <br>
+    <h1> {{ user }} </h1>
+    <br>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+      <h3 class="panel-title">Libraries</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row center-block">
+
+        <div class="col-6 col-md-4">
+          <a href='#' class="btn btn-default btn-lg" role="button"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>  Monte Carlo</a>
+        </div>
+
+        <div class="col-6 col-md-4">
+          <a href='#' class="btn btn-default btn-lg" role="button"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>  gcards</a>
+        </div>
+
+        <div class="col-6 col-md-4">
+          <a href='#' class="btn btn-default btn-lg" role="button"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>  Results</a>
+        </div>
+
+      </div>
+      <h4>
+    </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Projects</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>Project (edit)</th>
+              <th>Abstract</th>
+              <th>Clone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in projects %}
+            <tr>
+              <td> <a href= {{ url_for('edit', project=p['title']) }}> {{ p['title'] }} </a> </td>
+              <td> {{ p['abstract'] }} </td>
+              <td> <a href= {{ url_for('clone', project=p['title']) }} class="btn btn-success btn-xs" role="button">Clone</a> </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</body>
+
+</html>
