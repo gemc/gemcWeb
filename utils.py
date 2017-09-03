@@ -2,13 +2,7 @@ import os, hashlib, json, subprocess, time, shutil
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-def get_salty():
-	"""Gets the salt"""
-	with open('salt.txt', 'r') as f:
-		s = f.readline().strip()
-	return s
-
-salt = get_salty()
+salt = "salty"
 
 """
 To generate a salt run CL Python and run the following:
@@ -16,7 +10,7 @@ To generate a salt run CL Python and run the following:
 >>> import random
 >>> ''.join(random.choice('0123456789abcdefghijklmnopqrstuvwxyz') for i in range(32))
 
-Copy and paste this as your salt into your basedir's salt.txt file
+Copy and paste this as your salt.
 """
 
 def create_account(user, password):

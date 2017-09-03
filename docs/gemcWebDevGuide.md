@@ -24,7 +24,7 @@ and user-friendly guide that will be included in the same location as this
 documentation. It should be noted that the Jana and Root packages are
 not used for gemcWeb and are there is no need to install them.
 
-### Cloning the project 
+### Cloning the project
 
 Once gemc is set up, the project can be cloned from GitHub into your desired
 working directory. To do this open a terminal and run:
@@ -33,7 +33,7 @@ working directory. To do this open a terminal and run:
 git clone htttps://github.com/gemc/gemcWeb.git
 ```
 
-### Installing Dependencies 
+### Installing Dependencies
 
 The necessary dependencies to develop gemcWeb are the Flask micro-framework,
 the Jinja2 template engine, and virtualenv. These can all be installed using
@@ -91,8 +91,8 @@ The following is the directory structure of gemcWeb, highlighting important file
 
 ```
 ~/gemcWeb
-|-- run.py
-|-- scripts.py
+|-- gemcWeb.py
+|-- utils.py
 |__ /components
 		|__ /example_experiment
 		|__ /expjson
@@ -110,11 +110,11 @@ The following is the directory structure of gemcWeb, highlighting important file
 				|-- pwd.txt
 ```
 
-#### run.py
+#### gemcWeb.py
 
 This file is the back end. It contains a Flask configuration seciton, and handles the back end tasks. This includes URL routing, handling user data, and calling scripts that run gemc and such.
 
-#### scripts.py
+#### utils.py
 
 This file contatins all of the back end scripting. Included is account handling, data handling and creation, running gemc, handling results, and more.
 
@@ -122,7 +122,7 @@ This file contatins all of the back end scripting. Included is account handling,
 
 #### components
 
-This directory contains components needed to run specfic experiments with gemc. 
+This directory contains components needed to run specfic experiments with gemc.
 
 ##### example_experiment
 

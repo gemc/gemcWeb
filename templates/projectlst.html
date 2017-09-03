@@ -40,7 +40,7 @@
           <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href= {{ url_for('new_exp') }}>New Project</a></li>
+                  <li><a href= {{ url_for('fresh_exp') }}>New Project</a></li>
                   <li><a href= {{ url_for('proj_lst') }} class="active">Projects</a></li>
                 </ul>
               </li>
@@ -53,7 +53,7 @@
 
   <!-- Home GUI-->
   <div id="gui" class="container">
-    <a href= {{ url_for('new_exp') }} class="btn btn-primary btn-lg pull-right" role="button"><b>+ New Project</b></a>
+    <a href= {{ url_for('fresh_exp') }} class="btn btn-primary btn-lg pull-right" role="button"><b>+ New Project</b></a>
     <br>
     <h1> {{ user }} </h1>
     <br>

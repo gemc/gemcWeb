@@ -164,9 +164,9 @@ def erase_proj(project):
         return redirect(url_for('home'))
     return redirect(url_for('login'))
 
-@app.route('/_new_experiment')
-def new_exp():
-    """Loads a blank new experiment template"""
+@app.route('/_fresh_experiment')
+def fresh_exp():
+    """Loads a blank fresh experiment template"""
     if g.user:
         exps = s.get_experiment_list()
         now = datetime.datetime.now()
@@ -174,7 +174,7 @@ def new_exp():
         session['exp'] = tmp
         s.create_project_dir(g.user, tmp)
         s.create_experiment_data(g.user, session['exp'])
-        return render_template('newexperiment.html', exps=exps)
+        return render_template('freshexperiment.html', exps=exps)
     return redirect(url_for('login'))
 
 @app.route('/edit/<project>')
@@ -204,7 +204,7 @@ def clone(project):
 
 @app.route('/_name_&_abstract')
 def name_and_abstract():
-    """Handles getting the name and abstract of a new experiment"""
+    """Handles getting the name and abstract of a fresh experiment"""
     if g.user:
         title = request.args.get('title')
         abstract = request.args.get('abstract')
@@ -216,7 +216,7 @@ def name_and_abstract():
 
 @app.route('/_gl_upload', methods=['POST'])
 def gl():
-    """Handles getting the gl file of a new experiment"""
+    """Handles getting the gl file of a fresh experiment"""
     import uuid
     from werkzeug import secure_filename
     from shutil import copy
@@ -245,7 +245,7 @@ def gl():
 
 @app.route('/_ec')
 def ec():
-	"""Handles getting the experiment choice of a new experiment"""
+	"""Handles getting the experiment choice of a fresh experiment"""
 	if g.user:
 		ec = s.trim_ec(request.args.get('x_sel'))
 		edes = s.get_ec_info(ec, 'description')
@@ -264,7 +264,7 @@ def display_ao():
 
 @app.route('/_ao')
 def ao():
-	"""Handles getting the ao if selected of a new experiment"""
+	"""Handles getting the ao if selected of a fresh experiment"""
 	if g.user:
 		ao = s.trim_ao(request.args.get('advanced_select'))
 		s.write_experiment_data(g.user, session['exp'], 'ao', ao)
@@ -273,7 +273,7 @@ def ao():
 
 @app.route('/go')
 def go():
-    """Generates the gcard, runs gemc and returns results of a new experiment"""
+    """Generates the gcard, runs gemc and returns results of a fresh experiment"""
     if g.user:
         s.gen_gcard(g.user, session['exp'])
         if s.run_gemc(g.user, session['exp']):
